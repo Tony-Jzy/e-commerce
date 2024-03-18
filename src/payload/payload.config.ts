@@ -28,6 +28,7 @@ import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
 import { priceUpdated } from './stripe/webhooks/priceUpdated'
 import { productUpdated } from './stripe/webhooks/productUpdated'
+import Search from '@payloadcms/plugin-search'
 
 const generateTitle: GenerateTitle = () => {
   return 'My Store'
@@ -131,6 +132,13 @@ export default buildConfig({
         'price.updated': priceUpdated,
       },
     }),
+    Search({
+      collections: ['pages', 'products'],
+      defaultPriorities: {
+        pages: 10,
+        products: 20,
+      },
+    }),
     redirects({
       collections: ['pages', 'products'],
     }),
@@ -142,6 +150,7 @@ export default buildConfig({
       generateTitle,
       uploadsCollection: 'media',
     }),
+
     payloadCloud(),
   ],
 })

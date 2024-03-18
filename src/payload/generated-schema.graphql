@@ -23,6 +23,9 @@ type Query {
   docAccessUser(id: String!): usersDocAccess
   meUser: usersMe
   initializedUser: Boolean
+  Search(id: String!, draft: Boolean): Search
+  Searches(draft: Boolean, where: Search_where, limit: Int, page: Int, sort: String): Searches
+  docAccessSearch(id: String!): searchDocAccess
   Redirect(id: String!, draft: Boolean): Redirect
   Redirects(draft: Boolean, where: Redirect_where, limit: Int, page: Int, sort: String): Redirects
   docAccessRedirect(id: String!): redirectsDocAccess
@@ -4846,6 +4849,7 @@ type User {
 }
 
 enum User_roles {
+  developer
   admin
   customer
 }
@@ -6240,6 +6244,7 @@ input User_roles_operator {
 }
 
 enum User_roles_Input {
+  developer
   admin
   customer
 }
@@ -6763,6 +6768,313 @@ type usersMe {
   exp: Int
   token: String
   user: User
+}
+
+type Search {
+  id: String
+  title: String
+  priority: Float
+  doc: Search_Doc_Relationship!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Search_Doc_Relationship {
+  relationTo: Search_Doc_RelationTo
+  value: Search_Doc
+}
+
+enum Search_Doc_RelationTo {
+  pages
+  products
+}
+
+union Search_Doc = Page | Product
+
+type Searches {
+  docs: [Search]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Search_where {
+  title: Search_title_operator
+  priority: Search_priority_operator
+  doc: Search_doc_Relation
+  updatedAt: Search_updatedAt_operator
+  createdAt: Search_createdAt_operator
+  id: Search_id_operator
+  AND: [Search_where_and]
+  OR: [Search_where_or]
+}
+
+input Search_title_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Search_priority_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Search_doc_Relation {
+  relationTo: Search_doc_Relation_RelationTo
+  value: JSON
+}
+
+enum Search_doc_Relation_RelationTo {
+  pages
+  products
+}
+
+input Search_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Search_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Search_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Search_where_and {
+  title: Search_title_operator
+  priority: Search_priority_operator
+  doc: Search_doc_Relation
+  updatedAt: Search_updatedAt_operator
+  createdAt: Search_createdAt_operator
+  id: Search_id_operator
+  AND: [Search_where_and]
+  OR: [Search_where_or]
+}
+
+input Search_where_or {
+  title: Search_title_operator
+  priority: Search_priority_operator
+  doc: Search_doc_Relation
+  updatedAt: Search_updatedAt_operator
+  createdAt: Search_createdAt_operator
+  id: Search_id_operator
+  AND: [Search_where_and]
+  OR: [Search_where_or]
+}
+
+type searchDocAccess {
+  fields: SearchDocAccessFields
+  create: SearchCreateDocAccess
+  read: SearchReadDocAccess
+  update: SearchUpdateDocAccess
+  delete: SearchDeleteDocAccess
+}
+
+type SearchDocAccessFields {
+  title: SearchDocAccessFields_title
+  priority: SearchDocAccessFields_priority
+  doc: SearchDocAccessFields_doc
+  docUrl: SearchDocAccessFields_docUrl
+  updatedAt: SearchDocAccessFields_updatedAt
+  createdAt: SearchDocAccessFields_createdAt
+}
+
+type SearchDocAccessFields_title {
+  create: SearchDocAccessFields_title_Create
+  read: SearchDocAccessFields_title_Read
+  update: SearchDocAccessFields_title_Update
+  delete: SearchDocAccessFields_title_Delete
+}
+
+type SearchDocAccessFields_title_Create {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_title_Read {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_title_Update {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_title_Delete {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_priority {
+  create: SearchDocAccessFields_priority_Create
+  read: SearchDocAccessFields_priority_Read
+  update: SearchDocAccessFields_priority_Update
+  delete: SearchDocAccessFields_priority_Delete
+}
+
+type SearchDocAccessFields_priority_Create {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_priority_Read {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_priority_Update {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_priority_Delete {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_doc {
+  create: SearchDocAccessFields_doc_Create
+  read: SearchDocAccessFields_doc_Read
+  update: SearchDocAccessFields_doc_Update
+  delete: SearchDocAccessFields_doc_Delete
+}
+
+type SearchDocAccessFields_doc_Create {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_doc_Read {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_doc_Update {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_doc_Delete {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_docUrl {
+  create: SearchDocAccessFields_docUrl_Create
+  read: SearchDocAccessFields_docUrl_Read
+  update: SearchDocAccessFields_docUrl_Update
+  delete: SearchDocAccessFields_docUrl_Delete
+}
+
+type SearchDocAccessFields_docUrl_Create {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_docUrl_Read {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_docUrl_Update {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_docUrl_Delete {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_updatedAt {
+  create: SearchDocAccessFields_updatedAt_Create
+  read: SearchDocAccessFields_updatedAt_Read
+  update: SearchDocAccessFields_updatedAt_Update
+  delete: SearchDocAccessFields_updatedAt_Delete
+}
+
+type SearchDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_createdAt {
+  create: SearchDocAccessFields_createdAt_Create
+  read: SearchDocAccessFields_createdAt_Read
+  update: SearchDocAccessFields_createdAt_Update
+  delete: SearchDocAccessFields_createdAt_Delete
+}
+
+type SearchDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type SearchDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type SearchCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SearchReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SearchUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SearchDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
 }
 
 type Redirect {
@@ -8514,6 +8826,7 @@ type Access {
   media: mediaAccess
   categories: categoriesAccess
   users: usersAccess
+  search: searchAccess
   redirects: redirectsAccess
   payload_preferences: payload_preferencesAccess
   settings: settingsAccess
@@ -10945,6 +11258,181 @@ type UsersUnlockAccess {
   where: JSONObject
 }
 
+type searchAccess {
+  fields: SearchFields
+  create: SearchCreateAccess
+  read: SearchReadAccess
+  update: SearchUpdateAccess
+  delete: SearchDeleteAccess
+}
+
+type SearchFields {
+  title: SearchFields_title
+  priority: SearchFields_priority
+  doc: SearchFields_doc
+  docUrl: SearchFields_docUrl
+  updatedAt: SearchFields_updatedAt
+  createdAt: SearchFields_createdAt
+}
+
+type SearchFields_title {
+  create: SearchFields_title_Create
+  read: SearchFields_title_Read
+  update: SearchFields_title_Update
+  delete: SearchFields_title_Delete
+}
+
+type SearchFields_title_Create {
+  permission: Boolean!
+}
+
+type SearchFields_title_Read {
+  permission: Boolean!
+}
+
+type SearchFields_title_Update {
+  permission: Boolean!
+}
+
+type SearchFields_title_Delete {
+  permission: Boolean!
+}
+
+type SearchFields_priority {
+  create: SearchFields_priority_Create
+  read: SearchFields_priority_Read
+  update: SearchFields_priority_Update
+  delete: SearchFields_priority_Delete
+}
+
+type SearchFields_priority_Create {
+  permission: Boolean!
+}
+
+type SearchFields_priority_Read {
+  permission: Boolean!
+}
+
+type SearchFields_priority_Update {
+  permission: Boolean!
+}
+
+type SearchFields_priority_Delete {
+  permission: Boolean!
+}
+
+type SearchFields_doc {
+  create: SearchFields_doc_Create
+  read: SearchFields_doc_Read
+  update: SearchFields_doc_Update
+  delete: SearchFields_doc_Delete
+}
+
+type SearchFields_doc_Create {
+  permission: Boolean!
+}
+
+type SearchFields_doc_Read {
+  permission: Boolean!
+}
+
+type SearchFields_doc_Update {
+  permission: Boolean!
+}
+
+type SearchFields_doc_Delete {
+  permission: Boolean!
+}
+
+type SearchFields_docUrl {
+  create: SearchFields_docUrl_Create
+  read: SearchFields_docUrl_Read
+  update: SearchFields_docUrl_Update
+  delete: SearchFields_docUrl_Delete
+}
+
+type SearchFields_docUrl_Create {
+  permission: Boolean!
+}
+
+type SearchFields_docUrl_Read {
+  permission: Boolean!
+}
+
+type SearchFields_docUrl_Update {
+  permission: Boolean!
+}
+
+type SearchFields_docUrl_Delete {
+  permission: Boolean!
+}
+
+type SearchFields_updatedAt {
+  create: SearchFields_updatedAt_Create
+  read: SearchFields_updatedAt_Read
+  update: SearchFields_updatedAt_Update
+  delete: SearchFields_updatedAt_Delete
+}
+
+type SearchFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type SearchFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type SearchFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type SearchFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type SearchFields_createdAt {
+  create: SearchFields_createdAt_Create
+  read: SearchFields_createdAt_Read
+  update: SearchFields_createdAt_Update
+  delete: SearchFields_createdAt_Delete
+}
+
+type SearchFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type SearchFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type SearchFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type SearchFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type SearchCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SearchReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SearchUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SearchDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type redirectsAccess {
   fields: RedirectsFields
   create: RedirectsCreateAccess
@@ -12024,6 +12512,9 @@ type Mutation {
   forgotPasswordUser(disableEmail: Boolean, email: String!, expiration: Int): Boolean!
   resetPasswordUser(password: String, token: String): usersResetPassword
   verifyEmailUser(token: String): Boolean
+  createSearch(data: mutationSearchInput!, draft: Boolean): Search
+  updateSearch(id: String!, autosave: Boolean, data: mutationSearchUpdateInput!, draft: Boolean): Search
+  deleteSearch(id: String!): Search
   createRedirect(data: mutationRedirectInput!, draft: Boolean): Redirect
   updateRedirect(id: String!, autosave: Boolean, data: mutationRedirectUpdateInput!, draft: Boolean): Redirect
   deleteRedirect(id: String!): Redirect
@@ -12339,6 +12830,7 @@ input mutationUserInput {
 }
 
 enum User_roles_MutationInput {
+  developer
   admin
   customer
 }
@@ -12373,6 +12865,7 @@ input mutationUserUpdateInput {
 }
 
 enum UserUpdate_roles_MutationInput {
+  developer
   admin
   customer
 }
@@ -12407,6 +12900,42 @@ type usersLoginResult {
 type usersResetPassword {
   token: String
   user: User
+}
+
+input mutationSearchInput {
+  title: String
+  priority: Float
+  doc: Search_DocRelationshipInput
+  updatedAt: String
+  createdAt: String
+}
+
+input Search_DocRelationshipInput {
+  relationTo: Search_DocRelationshipInputRelationTo
+  value: JSON
+}
+
+enum Search_DocRelationshipInputRelationTo {
+  pages
+  products
+}
+
+input mutationSearchUpdateInput {
+  title: String
+  priority: Float
+  doc: SearchUpdate_DocRelationshipInput
+  updatedAt: String
+  createdAt: String
+}
+
+input SearchUpdate_DocRelationshipInput {
+  relationTo: SearchUpdate_DocRelationshipInputRelationTo
+  value: JSON
+}
+
+enum SearchUpdate_DocRelationshipInputRelationTo {
+  pages
+  products
 }
 
 input mutationRedirectInput {

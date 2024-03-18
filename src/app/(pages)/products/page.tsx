@@ -9,6 +9,7 @@ import { fetchDoc } from '../../_api/fetchDoc'
 import { draftMode } from 'next/headers'
 import { fetchDocs } from '../../_api/fetchDocs'
 import { HR } from '../../_components/HR'
+import SearchBar from '../../_components/SearchBar'
 
 const Products = async () => {
   const { isEnabled: isDraftMode } = draftMode()
@@ -23,6 +24,10 @@ const Products = async () => {
       draft: isDraftMode,
     })
 
+    // console.log('[product page fetched start]-----')
+    // console.log(page)
+    // console.log('[product page fetched end]-----')
+
     categories = await fetchDocs<Category>('categories')
   } catch (error) {
     console.log(error)
@@ -30,6 +35,7 @@ const Products = async () => {
 
   return (
     <div className={classes.container}>
+      <SearchBar />
       <Gutter className={classes.products}>
         <Filters categories={categories} />
 

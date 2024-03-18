@@ -10,6 +10,8 @@ import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 import { loginAfterCreate } from './hooks/loginAfterCreate'
 import { resolveDuplicatePurchases } from './hooks/resolveDuplicatePurchases'
 import { CustomerSelect } from './ui/CustomerSelect'
+import { developer } from '../../access/developers'
+import { adminsOrLoggedIn } from '../../access/adminsOrLoggedIn'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -22,7 +24,7 @@ const Users: CollectionConfig = {
     create: anyone,
     update: adminsAndUser,
     delete: admins,
-    admin: ({ req: { user } }) => checkRole(['admin'], user),
+    admin: ({ req: { user } }) => checkRole(['admin'], user) || checkRole(['developer'], user),
   },
   hooks: {
     beforeChange: [createStripeCustomer],
@@ -53,6 +55,10 @@ const Users: CollectionConfig = {
       defaultValue: ['customer'],
       options: [
         {
+          label: 'developer',
+          value: 'developer',
+        },
+        {
           label: 'admin',
           value: 'admin',
         },
@@ -65,9 +71,9 @@ const Users: CollectionConfig = {
         beforeChange: [ensureFirstUserIsAdmin],
       },
       access: {
-        read: admins,
-        create: admins,
-        update: admins,
+        read: developer,
+        create: developer,
+        update: developer,
       },
     },
     {
@@ -85,7 +91,7 @@ const Users: CollectionConfig = {
       label: 'Stripe Customer',
       type: 'text',
       access: {
-        read: ({ req: { user } }) => checkRole(['admin'], user),
+        read: developer,
       },
       admin: {
         position: 'sidebar',

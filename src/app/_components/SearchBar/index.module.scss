@@ -1,0 +1,87 @@
+@import '../../_css/common';
+.gutter {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 213, 31);
+    padding: 36px 0;
+  }
+
+.dropdown {
+    position: absolute;
+    background-color: black;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    width: 100%;
+    z-index: 1;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdownItem img {
+    width: 50px;
+    height: auto;
+}
+
+.dropdownItem h4 {
+    margin: 0;
+}
+
+.dropdownItem p {
+    margin: 0;
+}
+
+.searchBar_container {
+    display: flex;
+    max-width: 80%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    gap: 3vh;
+    
+
+  @include mid-break {
+    max-width: 80%;
+  }
+
+  @include small-break {
+    max-width: 80%;
+  }
+  }
+  
+  .search_input {
+    width: 80%; /* Adjust as needed for width */
+    padding: 15px 20px; /* Adjust for padding and height */
+    font-size: 18px; /* Adjust as needed for font size */
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    outline: none;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    box-sizing: border-box; /* To make sure padding doesn't affect the width */
+  }
+  
+  /* Additional styling for focus effect */
+  .search_input:focus {
+    box-shadow: 0 3px 8px rgb(32 33 36 / 40%);
+  }
+
+  .search_btn{
+    border-radius: 24px;
+    font-size: 18px; /* Adjust as needed for font size */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+  }
+
+  .search_btn:hover{
+    background-color: white;
+    color: black;
+  }

@@ -21,7 +21,7 @@ export default async function CreateAccount() {
   return (
     <section className={classes.createAccount}>
       <div className={classes.heroImg}>
-        <Link href="/">
+        {/* <Link href="/">
           <Image
             src="/logo-black.svg"
             alt="logo"
@@ -29,7 +29,7 @@ export default async function CreateAccount() {
             height={23}
             className={classes.logo}
           />
-        </Link>
+        </Link> */}
       </div>
 
       <div className={classes.formWrapper}>

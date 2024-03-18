@@ -1,11 +1,13 @@
 import type { GlobalConfig } from 'payload/types'
 
 import link from '../fields/link'
+import { developer } from '../access/developers'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
   access: {
     read: () => true,
+    update: developer,
   },
   fields: [
     {

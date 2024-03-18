@@ -9,13 +9,15 @@
   align-items: flex-end;
   justify-content: center;
   padding: 20px;
+  border-radius: 10px;
   cursor: pointer;
 
   background-size: cover;
-  background-size: auto 250px;
+  background-size: auto 280px;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 .title {
   border-radius: 10px;
@@ -23,4 +25,14 @@
   width: 100%;
   text-align: center;
   background-color: white;
+  border: 1px solid #ccc;
+  transition: box-shadow .3s;
+  transition: font-size .5s;
 }
+
+
+.card:hover .title{
+  box-shadow: 0 0 15px rgba(33,33,33,.2); 
+  font-size: 25px;
+}
+

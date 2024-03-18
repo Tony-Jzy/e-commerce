@@ -1510,6 +1510,13 @@
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-redirects/-/plugin-redirects-1.0.1.tgz#6660d21b11aa81e55931bd2f346e6b9fc95f0b61"
   integrity sha512-07EbEm6x7s8Nnzi0U+5/7wbqMdZHIGZh4AxKPAILtY/ohqbQ+vxJa4S0f5Xe7hRvc9hLm4Kp9zrC6zvbRvUvSA==
 
+"@payloadcms/plugin-search@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-search/-/plugin-search-1.1.0.tgz#4bb08f29939e96506f14ea74853e2fd2ecb59ad2"
+  integrity sha512-iCjAdHOygzbNwZ0Cz+JuxIC+kL0iTqwpfPxNs5PSe89mzuNI7CVeA1QtteqOxQIkiHju6xGzX8V1VfMyluzetQ==
+  dependencies:
+    ts-deepmerge "^2.0.1"
+
 "@payloadcms/plugin-seo@^1.0.10":
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-1.0.15.tgz#ca794897d1e8c3291a8dd74339b7f28f10bba815"
@@ -8506,6 +8513,11 @@ truncate-utf8-bytes@^1.0.0:
   integrity sha512-95Pu1QXQvruGEhv62XCMO3Mm90GscOCClvrIUwCM0PYOXK3kaF3l3sIHxx71ThJfcbM2O5Au6SO3AWCSEfW4mQ==
   dependencies:
     utf8-byte-length "^1.0.1"
+
+ts-deepmerge@^2.0.1:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/ts-deepmerge/-/ts-deepmerge-2.0.7.tgz#36786a9a10b5f3a6f5154007cf17bfba7251e0a7"
+  integrity sha512-3phiGcxPSSR47RBubQxPoZ+pqXsEsozLo4G4AlSrsMKTFg9TA3l+3he5BqpUi9wiuDbaHWXH/amlzQ49uEdXtg==
 
 ts-essentials@7.0.3:
   version "7.0.3"

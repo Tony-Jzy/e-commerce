@@ -22,6 +22,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    search: Search;
     redirects: Redirect;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -413,7 +414,7 @@ export interface Order {
 export interface User {
   id: string;
   name?: string | null;
-  roles?: ('admin' | 'customer')[] | null;
+  roles?: ('developer' | 'admin' | 'customer')[] | null;
   purchases?: (string | Product)[] | null;
   stripeCustomerID?: string | null;
   cart?: {
@@ -430,6 +431,22 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password: string | null;
+}
+export interface Search {
+  id: string;
+  title?: string | null;
+  priority?: number | null;
+  doc:
+    | {
+        relationTo: 'pages';
+        value: string | Page;
+      }
+    | {
+        relationTo: 'products';
+        value: string | Product;
+      };
+  updatedAt: string;
+  createdAt: string;
 }
 export interface Redirect {
   id: string;

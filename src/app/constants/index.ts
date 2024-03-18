@@ -5,8 +5,8 @@ export const inclusions = [
     icon: '/assets/icons/shipping.svg',
   },
   {
-    title: 'Money Guarantee',
-    description: 'Within 30 days for an exchange',
+    title: 'Best Price',
+    description: 'Best Price within the industry',
     icon: '/assets/icons/dollar.svg',
   },
   {

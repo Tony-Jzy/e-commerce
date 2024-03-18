@@ -5,13 +5,14 @@
   grid-template-columns: 1fr 45%;
   height: 100vh;
   overflow: auto;
+  margin-top: -50px;
 
   @include mid-break {
     grid-template-columns: 1fr;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/assets/images/image-2.svg');
+    background-image: url('/assets/images/2.jpg');
   }
 
   p {
@@ -45,7 +46,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('/assets/images/image-2.svg');
+  background-image: url('/assets/images/2.jpg');
 
   @include mid-break {
     background: none;

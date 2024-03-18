@@ -10,6 +10,7 @@ import { slugField } from '../../fields/slug'
 import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
 import { adminsOrPublished } from './access/adminsOrPublished'
 import { revalidatePage } from './hooks/revalidatePage'
+import { developer } from '../../access/developers'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -31,9 +32,9 @@ export const Pages: CollectionConfig = {
   },
   access: {
     read: adminsOrPublished,
-    update: admins,
-    create: admins,
-    delete: admins,
+    update: developer,
+    create: developer,
+    delete: developer,
   },
   fields: [
     {

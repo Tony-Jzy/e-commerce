@@ -74,7 +74,15 @@
   display: block;
   position: relative;
   min-height: 262px;
-  background-color: var(--color-dark-50);
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: box-shadow .3s;
+
+}
+
+.mediaWrapper:hover {
+  box-shadow: 0 0 15px rgba(33,33,33,.2); 
 }
 
 .image {
