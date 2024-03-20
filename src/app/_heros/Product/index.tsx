@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react'
+'use client'
+
+import React, { Fragment, useState } from 'react'
 import Link from 'next/link'
 
 import { Product } from '../../../payload/payload-types'
@@ -21,6 +23,14 @@ export const ProductHero: React.FC<{
     categories,
     meta: { image: metaImage, description } = {},
   } = product
+
+  const [quantity, setQuantity] = useState(1)
+
+  const enterQty = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedQty = Number(e.target.value)
+
+    setQuantity(updatedQty)
+  }
 
   return (
     <Gutter className={classes.productHero}>
@@ -65,7 +75,21 @@ export const ProductHero: React.FC<{
           <h6>Description</h6>
           <p>{description}</p>
         </div>
-        <AddToCartButton product={product} className={classes.addToCartButton} />
+        <div className={classes.addCartContainer}>
+          <div className={classes.quantity}>
+            <input
+              type="text"
+              className={classes.quantityInput}
+              value={quantity}
+              onChange={enterQty}
+            />
+          </div>
+          <AddToCartButton
+            product={product}
+            quantity={quantity}
+            className={classes.addToCartButton}
+          />
+        </div>
       </div>
     </Gutter>
   )
