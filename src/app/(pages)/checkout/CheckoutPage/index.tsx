@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import Link from 'next/link'
@@ -34,8 +34,19 @@ export const CheckoutPage: React.FC<{
   const [clientSecret, setClientSecret] = React.useState()
   const hasMadePaymentIntent = React.useRef(false)
   const { theme } = useTheme()
+  const [grandTotal, getGrandTotal] = useState(0)
+  const [gst, setGst] = useState(0)
 
   const { cart, cartIsEmpty, cartTotal } = useCart()
+
+  useEffect(() => {
+    const gstPercentage = 10 // GST rate
+    const gstAmount = Math.round((cartTotal.raw * gstPercentage) / 100) / 100
+    const totalAmount = (cartTotal.raw + gstAmount * 100) / 100 // Total includes GST
+
+    setGst(gstAmount)
+    getGrandTotal(totalAmount)
+  }, [cartTotal])
 
   useEffect(() => {
     if (user !== null && cartIsEmpty) {
@@ -129,9 +140,27 @@ export const CheckoutPage: React.FC<{
               }
               return null
             })}
-            <div className={classes.orderTotal}>
-              <p>Order Total</p>
+            <div className={classes.cartTotal}>
+              <p>Cart Total</p>
               <p>{cartTotal.formatted}</p>
+            </div>
+            <div className={classes.gstTotal}>
+              <p>GST(10%)</p>
+              <p>
+                {gst.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'AUD',
+                })}
+              </p>
+            </div>
+            <div className={classes.orderTotal}>
+              <p>Grand Total</p>
+              <p>
+                {grandTotal.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'AUD',
+                })}
+              </p>
             </div>
           </ul>
         </div>

@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
-import { Category, Page, Product } from '../../../payload/payload-types'
+import type { Category, Page, Product } from '../../../payload/payload-types'
 import { staticHome } from '../../../payload/seed/home-static'
 import { fetchDoc } from '../../_api/fetchDoc'
 import { fetchDocs } from '../../_api/fetchDocs'
@@ -18,6 +18,7 @@ import classes from './index.module.scss'
 import Categories from '../../_components/Categories'
 import Promotion from '../../_components/Promotion'
 import SearchBar from '../../_components/SearchBar'
+import WhyUs from '../../_components/WhyUs'
 
 export default async function Page({ params: { slug = 'home' } }) {
   const { isEnabled: isDraftMode } = draftMode()
@@ -60,6 +61,7 @@ export default async function Page({ params: { slug = 'home' } }) {
             />
             <Categories categories={categories} />
             {/* <Promotion /> */}
+            <WhyUs />
           </Gutter>
         </section>
       ) : (

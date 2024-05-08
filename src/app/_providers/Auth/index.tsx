@@ -3,6 +3,8 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 import { User } from '../../../payload/payload-types'
+import { Emails } from 'resend/build/src/emails/emails'
+import { type } from 'os'
 
 // eslint-disable-next-line no-unused-vars
 type ResetPassword = (args: {
@@ -13,11 +15,28 @@ type ResetPassword = (args: {
 
 type ForgotPassword = (args: { email: string }) => Promise<void> // eslint-disable-line no-unused-vars
 
-type Create = (args: { email: string; password: string; passwordConfirm: string }) => Promise<void> // eslint-disable-line no-unused-vars
+type Create = (args: {
+  name: string
+  email: string
+  businessName: string
+  position: string
+  phoneNumber: string
+  ABN: string
+  ACN: string
+  address_1: string
+  address_2: string
+  state: string
+  suburb: string
+  postcode: string
+  password: string
+  passwordConfirm: string
+}) => Promise<void> // eslint-disable-line no-unused-vars
 
 type Login = (args: { email: string; password: string }) => Promise<User> // eslint-disable-line no-unused-vars
 
 type Logout = () => Promise<void>
+
+type Refresh = () => Promise<void>
 
 type AuthContext = {
   user?: User | null
@@ -27,6 +46,7 @@ type AuthContext = {
   create: Create
   resetPassword: ResetPassword
   forgotPassword: ForgotPassword
+  refresh: Refresh
   status: undefined | 'loggedOut' | 'loggedIn'
 }
 
@@ -50,6 +70,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           email: args.email,
           password: args.password,
           passwordConfirm: args.passwordConfirm,
+          name: args.name,
+          businessName: args.businessName,
+          position: args.position,
+          phoneNumber: args.phoneNumber,
+          ABN: args.ABN,
+          ACN: args.ACN,
+          address_1: args.address_1,
+          address_2: args.address_2,
+          state: args.state,
+          suburb: args.suburb,
+          postcode: args.postcode,
         }),
       })
 
@@ -68,9 +99,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = useCallback<Login>(async args => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/login`, {
+      // const resBackend = await fetch(
+      //   `${process.env.NEXT_PUBLIC_EE_SUPPLY_SERVER_URL}/api/users/login/`,
+      //   {
+      //     method: 'POST',
+      //     credentials: 'include',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //       email: args.email,
+      //       password: args.password,
+      //     }),
+      //   },
+      // )
+
+      // if (resBackend.ok) {
+      //   const response = await resBackend.json()
+      //   if (response.status != 200) throw new Error(response.msg)
+
+      const resFrontend = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/login`, {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -80,13 +129,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }),
       })
 
-      if (res.ok) {
-        const { user, errors } = await res.json()
+      if (resFrontend.ok) {
+        const { user, errors } = await resFrontend.json()
         if (errors) throw new Error(errors[0].message)
         setUser(user)
         setStatus('loggedIn')
         return user
       }
+      // } else {
+      //   const response = await resBackend.json()
+      //   throw new Error(response.detail)
+      // }
 
       throw new Error('Invalid login')
     } catch (e) {
@@ -96,6 +149,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = useCallback<Logout>(async () => {
     try {
+      // const resBackend = await fetch(
+      //   `${process.env.NEXT_PUBLIC_EE_SUPPLY_SERVER_URL}/api/users/logout/`,
+      //   {
+      //     method: 'POST',
+      //     credentials: 'include',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   },
+      // )
+
+      // if (resBackend.ok) {
+      //   const response = await resBackend.json()
+      //   if (response.status != 200) throw new Error(response.msg)
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/logout`, {
         method: 'POST',
         credentials: 'include',
@@ -110,6 +178,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       } else {
         throw new Error('An error occurred while attempting to logout.')
       }
+      // }
     } catch (e) {
       throw new Error('An error occurred while attempting to logout.')
     }
@@ -195,6 +264,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [])
 
+  const refresh = useCallback<Refresh>(async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_EE_SUPPLY_SERVER_URL}/api/users/refresh`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (res.ok) {
+        const response = await res.json()
+      } else {
+        throw new Error('Invalid login')
+      }
+    } catch (e) {
+      throw new Error('An error occurred while attempting to login.')
+    }
+  }, [])
+
+  function setCookie(name, value, days) {
+    let expires = ''
+    if (days) {
+      const date = new Date()
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+      expires = '; expires=' + date.toUTCString()
+    }
+    document.cookie = name + '=' + (value || '') + expires + '; path=/; Secure; SameSite=Strict'
+  }
+
   return (
     <Context.Provider
       value={{
@@ -205,6 +304,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         create,
         resetPassword,
         forgotPassword,
+        refresh,
         status,
       }}
     >

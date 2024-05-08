@@ -10,6 +10,7 @@ export type Props = {
   appearance?: 'default' | 'primary' | 'secondary' | 'none'
   el?: 'button' | 'link' | 'a'
   onClick?: () => void
+  onClickPromise?: () => void
   href?: string
   newTab?: boolean
   className?: string
@@ -27,6 +28,7 @@ export const Button: React.FC<Props> = ({
   appearance,
   className: classNameFromProps,
   onClick,
+  onClickPromise,
   type = 'button',
   disabled,
   invert,
@@ -56,7 +58,12 @@ export const Button: React.FC<Props> = ({
 
   if (el === 'link') {
     return (
-      <Link href={href || ''} className={className} {...newTabProps} onClick={onClick}>
+      <Link
+        href={href || ''}
+        className={className}
+        {...newTabProps}
+        onClick={onClick ? onClick : onClickPromise}
+      >
         {content}
       </Link>
     )
@@ -70,7 +77,7 @@ export const Button: React.FC<Props> = ({
       className={className}
       type={type}
       {...newTabProps}
-      onClick={onClick}
+      onClick={onClick ? onClick : onClickPromise}
       disabled={disabled}
     >
       {content}

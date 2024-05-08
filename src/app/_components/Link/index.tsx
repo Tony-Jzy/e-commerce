@@ -17,6 +17,7 @@ type CMSLinkType = {
   children?: React.ReactNode
   className?: string
   invert?: ButtonProps['invert']
+  aboutTab?: boolean
 }
 
 export const CMSLink: React.FC<CMSLinkType> = ({
@@ -29,6 +30,7 @@ export const CMSLink: React.FC<CMSLinkType> = ({
   children,
   className,
   invert,
+  aboutTab,
 }) => {
   const href =
     type === 'reference' && typeof reference?.value === 'object' && reference.value.slug
@@ -42,6 +44,15 @@ export const CMSLink: React.FC<CMSLinkType> = ({
   if (!appearance) {
     const newTabProps = newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 
+    if (aboutTab) {
+      return (
+        <Link {...newTabProps} href={null} className={className}>
+          {label && label}
+          {children && children}
+        </Link>
+      )
+    }
+
     if (href || url) {
       return (
         <Link {...newTabProps} href={href || url} className={className}>
@@ -50,6 +61,20 @@ export const CMSLink: React.FC<CMSLinkType> = ({
         </Link>
       )
     }
+  }
+
+  if (aboutTab) {
+    return (
+      <Button
+        el="button"
+        className={className}
+        newTab={newTab}
+        href={null}
+        appearance={appearance}
+        label={label}
+        invert={invert}
+      />
+    )
   }
 
   return (

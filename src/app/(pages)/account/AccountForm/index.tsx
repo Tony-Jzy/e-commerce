@@ -10,10 +10,21 @@ import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
 
 import classes from './index.module.scss'
+import { StateSelectInput } from '../../../_components/Input/StateSelectInput'
 
 type FormData = {
-  email: string
   name: string
+  email: string
+  businessName: string
+  position: string
+  phoneNumber: string
+  ABN: string
+  ACN: string
+  address_1: string
+  address_2: string
+  state: string
+  suburb: string
+  postcode: string
   password: string
   passwordConfirm: string
 }
@@ -23,6 +34,7 @@ const AccountForm: React.FC = () => {
   const [success, setSuccess] = useState('')
   const { user, setUser } = useAuth()
   const [changePassword, setChangePassword] = useState(false)
+  const [address, setAddress] = useState(null)
 
   const {
     register,
@@ -57,10 +69,20 @@ const AccountForm: React.FC = () => {
           setError('')
           setChangePassword(false)
           reset({
-            email: json.doc.email,
-            name: json.doc.name,
+            email: user.email,
+            name: user.name,
             password: '',
             passwordConfirm: '',
+            businessName: user.businessName,
+            position: user.position,
+            phoneNumber: user.phoneNumber,
+            ABN: user.ABN,
+            ACN: user.ACN,
+            address_1: user.address_1,
+            address_2: user.address_2,
+            state: user.state,
+            suburb: user.suburb,
+            postcode: user.postcode,
           })
         } else {
           setError('There was a problem updating your account.')
@@ -86,7 +108,19 @@ const AccountForm: React.FC = () => {
         name: user.name,
         password: '',
         passwordConfirm: '',
+        businessName: user.businessName,
+        position: user.position,
+        phoneNumber: user.phoneNumber,
+        ABN: user.ABN,
+        ACN: user.ACN,
+        address_1: user.address_1,
+        address_2: user.address_2,
+        state: user.state,
+        suburb: user.suburb,
+        postcode: user.postcode,
       })
+
+      setAddress(user)
     }
   }, [user, router, reset, changePassword])
 
@@ -99,11 +133,109 @@ const AccountForm: React.FC = () => {
             name="email"
             label="Email Address"
             required
+            disabled
             register={register}
             error={errors.email}
             type="email"
           />
-          <Input name="name" label="Name" register={register} error={errors.name} />
+          <Input name="name" label="Name" required register={register} error={errors.name} />
+
+          <Input
+            name="phoneNumber"
+            label="Phone Number"
+            required
+            register={register}
+            error={errors.phoneNumber}
+            type="text"
+          />
+
+          <Input
+            name="position"
+            label="Position/Title"
+            register={register}
+            error={errors.name}
+            type="text"
+          />
+          <Input
+            name="businessName"
+            label="Business Name"
+            required
+            disabled
+            register={register}
+            error={errors.businessName}
+            type="text"
+          />
+
+          <Input
+            name="ABN"
+            label="ABN"
+            required
+            disabled
+            register={register}
+            error={errors.ABN}
+            type="text"
+          />
+
+          <Input
+            name="ACN"
+            label="ACN"
+            disabled
+            register={register}
+            error={errors.ACN}
+            type="text"
+          />
+
+          <Input
+            name="address_1"
+            label="Adress Line 1"
+            required
+            register={register}
+            error={errors.address_1}
+            type="text"
+          />
+
+          <Input
+            name="address_2"
+            label="Adress Line 2"
+            register={register}
+            error={errors.address_2}
+            type="text"
+          />
+
+          <Input
+            name="state"
+            label="State"
+            required
+            register={register}
+            error={errors.state}
+            type="text"
+          />
+
+          <Input
+            name="suburb"
+            label="Suburb"
+            required
+            register={register}
+            error={errors.suburb}
+            type="text"
+          />
+
+          <Input
+            name="postcode"
+            label="Postcode"
+            required
+            register={register}
+            error={errors.postcode}
+            type="text"
+          />
+
+          {/* {address && (
+            <StateSelectInput
+              state={address.state}
+              suburb={address.suburb}
+              post_code={address.postcode}
+            />
+          )} */}
 
           <p>
             {'Change your account details below, or '}

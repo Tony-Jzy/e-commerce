@@ -9,8 +9,12 @@ import { Price } from '../Price'
 
 import classes from './index.module.scss'
 
-const priceFromJSON = (priceJSON): string => {
+const priceFromJSON = (priceJSON, priceRange): string => {
   let price = ''
+
+  if (priceRange) {
+    return priceRange
+  }
 
   if (priceJSON) {
     try {
@@ -46,7 +50,7 @@ export const Card: React.FC<{
     showCategories,
     title: titleFromProps,
     doc,
-    doc: { slug, title, categories, meta, priceJSON } = {},
+    doc: { slug, title, categories, meta, priceJSON, priceRange } = {},
     className,
   } = props
 
@@ -60,11 +64,11 @@ export const Card: React.FC<{
   const [
     price, // eslint-disable-line no-unused-vars
     setPrice,
-  ] = useState(() => priceFromJSON(priceJSON))
+  ] = useState(() => priceFromJSON(priceJSON, priceRange))
 
   useEffect(() => {
-    setPrice(priceFromJSON(priceJSON))
-  }, [priceJSON])
+    setPrice(priceFromJSON(priceJSON, priceRange))
+  }, [priceRange])
 
   return (
     <Link href={href} className={[classes.card, className].filter(Boolean).join('')}>
@@ -76,12 +80,12 @@ export const Card: React.FC<{
       </div>
       <div className={classes.content}>
         {titleToUse && <h4 className={classes.title}>{titleToUse}</h4>}
-        {description && (
+        {/* {description && (
           <div className={classes.body}>
             {description && <p className={classes.description}>{sanitizedDescription}</p>}
           </div>
-        )}
-        {doc && <Price product={doc} />}
+        )} */}
+        {doc && <Price product={doc} priceFromSKU={price} />}
       </div>
     </Link>
   )

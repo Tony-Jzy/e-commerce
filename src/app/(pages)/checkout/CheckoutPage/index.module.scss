@@ -31,8 +31,26 @@
   align-items: center;
 }
 
-.orderTotal {
+.cartTotal{
   margin-top: var(--base);
+  font-weight: 400;
+  text-align: end;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
+  margin-bottom: 10px;
+}
+
+.gstTotal{
+  font-weight: 400;
+  text-align: end;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
+  margin-bottom: 10px;
+}
+
+.orderTotal {
   font-weight: 600;
   text-align: end;
   display: flex;

@@ -1,0 +1,59 @@
+@import '../../_css/common';
+
+.container{
+    padding: 50px 50px;
+}
+
+.introContainer{
+    width: 70%;
+    margin-left: 15%;
+    @include small-break{
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+
+.bigTextContainer{
+    margin-top: 50px;
+    color: var(--color-dark-500);
+    font-size: 25px;
+}
+
+.textContainer{
+    margin-top: 50px;
+    color: var(--color-dark-500);
+    font-size: 16px;
+}
+
+.fontBold{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.imageContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin: 30px 0;
+
+    @include mid-break {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.backImage{
+    max-width: 1300px;
+    max-height: 738px;
+    width: 80%;
+
+
+    @include mid-break {
+        width: 90%;
+    }
+}

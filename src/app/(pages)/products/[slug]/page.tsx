@@ -3,13 +3,17 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
-import { Product, Product as ProductType } from '../../../../payload/payload-types'
+import type { Product, Product as ProductType } from '../../../../payload/payload-types'
 import { fetchDoc } from '../../../_api/fetchDoc'
 import { fetchDocs } from '../../../_api/fetchDocs'
 import { Blocks } from '../../../_components/Blocks'
 import { PaywallBlocks } from '../../../_components/PaywallBlocks'
 import { ProductHero } from '../../../_heros/Product'
 import { generateMeta } from '../../../_utilities/generateMeta'
+import { ProductDetail } from '../../../_components/ProductDetail'
+import ScrollUp from '../../../_components/ScrollUp'
+import { title } from 'process'
+import Breadcrumb from '../../../_components/Breadcrumb'
 
 // Force this page to be dynamic so that Next.js does not cache it
 // See the note in '../../../[slug]/page.tsx' about this
@@ -26,6 +30,9 @@ export default async function Product({ params: { slug } }) {
       slug,
       draft: isDraftMode,
     })
+    if (product.slug === undefined && !product.slug) {
+      product.slug = slug
+    }
   } catch (error) {
     console.error(error) // eslint-disable-line no-console
   }
@@ -36,10 +43,18 @@ export default async function Product({ params: { slug } }) {
 
   const { relatedProducts } = product
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products' },
+    { name: product.title, path: '/products/' + slug },
+  ]
+
   return (
     <>
+      <Breadcrumb crumbs={breadcrumbs} />
       <ProductHero product={product} />
       {product?.enablePaywall && <PaywallBlocks productSlug={slug as string} disableTopPadding />}
+      <ProductDetail product={product} />
       <Blocks
         disableTopPadding
         blocks={[
@@ -61,6 +76,7 @@ export default async function Product({ params: { slug } }) {
           },
         ]}
       />
+      <ScrollUp />
     </>
   )
 }

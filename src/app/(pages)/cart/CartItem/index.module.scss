@@ -11,8 +11,19 @@
 .mediaWrapper {
   position: relative;
   min-height: 100px;
-  padding: 16px;
-  background-color: var(--color-dark-50);
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mediaWrapper:hover {
+  box-shadow: 0 0 5px rgba(33,33,33,.2); 
+}
+
+
+.mediaWrapper:hover .image{
+  transform: scale(1.2);
 }
 
 .media {
@@ -38,7 +49,7 @@
 }
 
 .titleWrapper {
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   

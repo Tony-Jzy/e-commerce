@@ -16,12 +16,14 @@
 
 .grid {
   display: grid;
-  padding: 0;
-  grid-template-columns: repeat(3, minmax(30%, 1fr));
+  grid-template-columns: repeat(4, minmax(25%, 1fr));
   gap: 30px;
+  padding: 0;
+  width: 100%;
 
   @include mid-break {
     gap: 20px;
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
   }
 
   @include small-break {

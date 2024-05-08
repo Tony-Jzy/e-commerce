@@ -1,0 +1,51 @@
+@use '../../_css/queries.scss' as *;
+
+.container{
+  padding-top: 100px;
+}
+
+.inclusions {
+    display: grid;
+    justify-content: center;
+    gap: 30px;
+    padding: 0;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 100px 0;
+  
+    @include large-break {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    @include mid-break {
+      margin: 60px 0;
+    }
+  
+    @include extra-small-break {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
+  }
+
+  .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--color-dark-500);
+  }
+
+  .title{
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .content{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+  }

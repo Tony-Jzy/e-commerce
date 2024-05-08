@@ -2,37 +2,52 @@
 
 .card {
   position: relative;
-  background-color: var(--color-dark-50);
-  min-height: 360px;
+  height: 200px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  padding: 20px;
-  border-radius: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
   cursor: pointer;
+  transition: 0.2s;
+}
 
-  background-size: cover;
-  background-size: auto 280px;
-  background-position: center;
-  background-repeat: no-repeat;
+.image{
+  height: 200px;
+  width: auto;
+  padding: 20px;
+  transition: 0.2s;
 }
 
 
 .title {
-  border-radius: 10px;
+  border-radius: 2px;
   padding: 16px;
   width: 100%;
-  text-align: center;
-  background-color: white;
-  border: 1px solid #ccc;
-  transition: box-shadow .3s;
-  transition: font-size .5s;
+  text-align: start;
+  padding-left: 30px;
+  // border: 1px solid #ccc;
+  transition: 0.2s;
+  font-weight: 600;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.card:hover{
+  box-shadow: 0 0 20px rgba(33,33,33,.2); 
 }
 
 
 .card:hover .title{
-  box-shadow: 0 0 15px rgba(33,33,33,.2); 
   font-size: 25px;
 }
 
+
+.card:hover .image{
+  padding: 5px;
+}

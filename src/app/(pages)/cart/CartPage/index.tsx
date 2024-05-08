@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 
 import { Page, Settings } from '../../../../payload/payload-types'
@@ -25,7 +25,19 @@ export const CartPage: React.FC<{
 
   const { user } = useAuth()
 
-  const { cart, cartIsEmpty, addItemToCart, cartTotal, hasInitializedCart } = useCart()
+  const { cart, cartIsEmpty, changeItemToCart, cartTotal, hasInitializedCart } = useCart()
+
+  const [gst, setGst] = useState(0)
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    const gstPercentage = 10 // GST rate
+    const gstAmount = Math.round((cartTotal.raw * gstPercentage) / 100) / 100
+    const totalAmount = (cartTotal.raw + gstAmount * 100) / 100 // Total includes GST
+
+    setGst(gstAmount)
+    setTotal(totalAmount)
+  }, [cartTotal])
 
   return (
     <Fragment>
@@ -85,7 +97,8 @@ export const CartPage: React.FC<{
                           title={title}
                           metaImage={metaImage}
                           qty={quantity}
-                          addItemToCart={addItemToCart}
+                          changeItemToCart={changeItemToCart}
+                          index={index}
                         />
                       )
                     }
@@ -99,12 +112,26 @@ export const CartPage: React.FC<{
                   <h6 className={classes.cartTotal}>Summary</h6>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.cartTotal}>Delivery Charge</p>
-                  <p className={classes.cartTotal}>$0</p>
+                  <p className={classes.cartTotal}>Cart Total</p>
+                  <p className={classes.cartTotal}>{cartTotal.formatted}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.cartTotal}>GST</p>
+                  <p className={classes.cartTotal}>
+                    {gst.toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: 'AUD',
+                    })}
+                  </p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.cartTotal}>Grand Total</p>
-                  <p className={classes.cartTotal}>{cartTotal.formatted}</p>
+                  <p className={classes.cartTotal}>
+                    {total.toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: 'AUD',
+                    })}
+                  </p>
                 </div>
                 <Button
                   className={classes.checkoutButton}

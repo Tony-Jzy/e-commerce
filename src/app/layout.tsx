@@ -4,12 +4,15 @@ import { Jost } from 'next/font/google'
 
 import { AdminBar } from './_components/AdminBar'
 import { Footer } from './_components/Footer'
-import { Header } from './_components/Header'
+import { HeaderBar } from './_components/Header'
 import { Providers } from './_providers'
 import { InitTheme } from './_providers/Theme/InitTheme'
 import { mergeOpenGraph } from './_utilities/mergeOpenGraph'
+import { Toaster } from 'react-hot-toast'
 
 import './_css/app.scss'
+import ActiveSectionContextProvider from './_utilities/active-section-context'
+import ScrollToTop from './_components/ScrollToTop'
 
 const jost = Jost({
   subsets: ['latin'],
@@ -19,7 +22,7 @@ const jost = Jost({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <head>
         <InitTheme />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -27,12 +30,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className={jost.variable}>
         <Providers>
-          <AdminBar />
-          {/* @ts-expect-error */}
-          <Header />
-          <main className="main">{children}</main>
-          {/* @ts-expect-error */}
-          <Footer />
+          <ActiveSectionContextProvider>
+            {/* <AdminBar /> */}
+            {/* @ts-ignore */}
+            <HeaderBar />
+            <main className="main">{children}</main>
+            {/* @ts-ignore */}
+            <Footer />
+
+            <Toaster position="top-right" />
+            <ScrollToTop />
+          </ActiveSectionContextProvider>
         </Providers>
       </body>
     </html>

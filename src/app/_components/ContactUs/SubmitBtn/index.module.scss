@@ -1,0 +1,63 @@
+.submitBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 3rem;
+    width: 8rem;
+    background-color: rgb(17 24 39 / 1);
+    color: white;
+    border-radius: 9999px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    cursor: pointer;
+
+}
+
+.submitBtn:focus {
+    transform: scaleX(1.1) scaleY(1.1);
+}
+
+.submitBtn:hover {
+    transform: scaleX(1.1) scaleY(1.1);
+    background-color: rgb(3 7 18 / 1);
+}
+
+.submitBtn:active {
+    transform: scaleX(1.05) scaleY(1.05);
+}
+
+.submitBtn:disabled {
+    transform: scaleX(1) scaleY(1);
+}
+
+.submit{
+    height: 1.5rem;
+    width: 1.25rem;
+    animation: spin 1s linear infinite;
+    border-radius: 9999px;
+    border-bottom-width: 2px;
+    border-color: rgb(255 255 255 / 1);
+}
+
+.fa{
+    font-size: 0.75rem/* 12px */;
+    line-height: 1rem/* 16px */;
+    opacity: 0.7;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.submitBtn:hover .fa {
+    transform: translate(0.25rem, -0.25rem) ;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -6,6 +6,7 @@ import { Price } from '../../../_components/Price'
 import classes from './index.module.scss'
 
 export const CheckoutItem = ({ product, title, metaImage, quantity, index }) => {
+  const subProduct = JSON.parse(product.subSKUList)[0]
   return (
     <li className={classes.item} key={index}>
       <Link href={`/products/${product.slug}`} className={classes.mediaWrapper}>
@@ -18,6 +19,7 @@ export const CheckoutItem = ({ product, title, metaImage, quantity, index }) => 
       <div className={classes.itemDetails}>
         <div className={classes.titleWrapper}>
           <h6>{title}</h6>
+          <Price product={product} priceFromSKU={subProduct.subSKU} button={false} />
           <Price product={product} button={false} />
         </div>
         <p className={classes.quantity}>x{quantity}</p>

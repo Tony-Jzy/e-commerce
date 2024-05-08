@@ -26,13 +26,21 @@ export const PRODUCT = `
           ${MEDIA_BLOCK}
           ${ARCHIVE_BLOCK}
         }
+        backId
+        SKU
+        subSKU
+        subSKUList
         priceJSON
+        priceRange
+        specification
+        images
         enablePaywall
         relatedProducts {
           id
           slug
           title
           ${META}
+          priceJSON
         }
         ${META}
       }

@@ -7,8 +7,8 @@
   gap: 20px;
 
   @include large-break {
-    flex-direction: row;
-    gap: 40px;
+    flex-direction: column;
+    gap: 20px;
   }
   
   @include small-break {
@@ -29,6 +29,7 @@
 
   @include large-break {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 
   @include small-break {
@@ -59,4 +60,31 @@
 
 .hr {
   margin: 20px 0;
+}
+
+.filterBody {
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.hide {
+  display: none;
+}
+
+
+.filterSpan {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    font-weight: 400;
+    font-size: 18px;
+    border-top:  1px solid #f0f0f0;
+    border-bottom:  1px solid #f0f0f0;
+    cursor: pointer;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.down{
+  rotate: 90deg;
 }

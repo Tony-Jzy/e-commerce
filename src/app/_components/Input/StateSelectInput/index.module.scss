@@ -1,0 +1,36 @@
+.itemContainer{
+    width: 100%;
+    font-size: 14px;
+}
+
+
+.asterisk {
+  color: var(--color-error-500);
+}
+
+.label {
+  display: block;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.stateSelect{
+    min-width: 80px;
+    width: 50%;
+}
+
+.selectContainer{
+    display: flex;
+}
+
+
+.suburbSelect{
+    min-width: 50%;
+}
+
+.postcodeInput{
+    min-width: 60px;
+    width: 30%;
+    margin-left: 10px;
+    padding:0 16px;
+}

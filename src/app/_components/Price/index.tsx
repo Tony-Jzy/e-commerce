@@ -6,8 +6,18 @@ import { Product } from '../../../payload/payload-types'
 
 import classes from './index.module.scss'
 
-export const priceFromJSON = (priceJSON: string, quantity: number = 1, raw?: boolean): string => {
+export const priceFromJSON = (
+  priceJSON: string,
+  quantity: number = 1,
+  priceRange?: string,
+  unit?: string,
+  raw?: boolean,
+): string => {
   let price = ''
+
+  if (priceRange) {
+    return priceRange + (unit ? ` / ${unit}` : '')
+  }
 
   if (priceJSON) {
     try {
@@ -19,7 +29,7 @@ export const priceFromJSON = (priceJSON: string, quantity: number = 1, raw?: boo
 
       price = (priceValue / 100).toLocaleString('en-US', {
         style: 'currency',
-        currency: 'USD', // TODO: use `parsed.currency`
+        currency: 'AUD', // TODO: use `parsed.currency`
       })
 
       if (priceType === 'recurring') {
@@ -34,36 +44,51 @@ export const priceFromJSON = (priceJSON: string, quantity: number = 1, raw?: boo
     }
   }
 
-  return price
+  return price + (unit ? ` / ${unit}` : '')
 }
 
 export const Price: React.FC<{
   product: Product
   quantity?: number
   button?: 'addToCart' | 'removeFromCart' | false
+  priceFromSKU?: string
+  highlight?: boolean
 }> = props => {
-  const { product, product: { priceJSON } = {}, button = 'addToCart', quantity } = props
+  const {
+    product,
+    product: { priceJSON, specification } = {},
+    button = 'addToCart',
+    quantity,
+    priceFromSKU,
+    highlight = false,
+  } = props
+
+  const unit = (JSON.parse(specification)?.Unit || 'each').toUpperCase()
 
   const [price, setPrice] = useState<{
     actualPrice: string
     withQuantity: string
   }>(() => ({
-    actualPrice: priceFromJSON(priceJSON),
-    withQuantity: priceFromJSON(priceJSON, quantity),
+    actualPrice: priceFromJSON(priceJSON, 1, priceFromSKU, unit),
+    withQuantity: priceFromJSON(priceJSON, quantity, priceFromSKU, unit),
   }))
 
   useEffect(() => {
     setPrice({
-      actualPrice: priceFromJSON(priceJSON),
-      withQuantity: priceFromJSON(priceJSON, quantity),
+      actualPrice: priceFromJSON(priceJSON, 1, priceFromSKU),
+      withQuantity: priceFromJSON(priceJSON, quantity, priceFromSKU),
     })
-  }, [priceJSON, quantity])
+  }, [priceJSON, priceFromSKU, quantity])
 
   return (
     <div className={classes.actions}>
       {typeof price?.actualPrice !== 'undefined' && price?.withQuantity !== '' && (
-        <div className={classes.price}>
-          <p>{price?.withQuantity}</p>
+        <div className={[classes.price, highlight && classes.highlight].join(' ')}>
+          <p>
+            {priceFromSKU !== null && priceFromSKU !== undefined
+              ? priceFromSKU + (!highlight ? (unit ? ` / ${unit}` : '') : '')
+              : price?.withQuantity}
+          </p>
         </div>
       )}
     </div>

@@ -12,6 +12,7 @@ import { Pagination } from '../Pagination'
 
 import classes from './index.module.scss'
 import { useFilter } from '../../_providers/Filter'
+import page from '../../page'
 
 type Result = {
   docs: (Product | string)[]
@@ -39,11 +40,11 @@ export type Props = {
 }
 
 export const CollectionArchive: React.FC<Props> = props => {
-  const { categoryFilters, sort } = useFilter()
+  const { categoryFilters, sort, titleSearch } = useFilter()
 
   const {
     className,
-    limit = 10,
+    limit = 12,
     onResultChange,
     populateBy,
     populatedDocs,
@@ -121,12 +122,27 @@ export const CollectionArchive: React.FC<Props> = props => {
                         ? [categoryFilters]
                         : categoryFilters.map((cat: string) => cat).join(','),
                   },
+                  title: {
+                    contains: titleSearch,
+                  },
+                  isSubSKU: {
+                    equals: false,
+                  },
                 }
-              : {}),
+              : {
+                  title: {
+                    contains: titleSearch,
+                  },
+                  isSubSKU: {
+                    equals: false,
+                  },
+                }),
           },
         },
         { encode: false },
       )
+
+      // console.log('search', searchQuery)
 
       const makeRequest = async () => {
         try {
@@ -162,7 +178,7 @@ export const CollectionArchive: React.FC<Props> = props => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [page, categoryFilters, relationTo, onResultChange, sort, limit, populateBy])
+  }, [page, categoryFilters, titleSearch, relationTo, onResultChange, sort, limit, populateBy])
 
   return (
     <div className={[classes.collectionArchive, className].filter(Boolean).join(' ')}>
@@ -184,7 +200,6 @@ export const CollectionArchive: React.FC<Props> = props => {
             if (typeof result === 'object' && result !== null) {
               return <Card key={index} doc={result} relationTo={relationTo} showCategories />
             }
-
             return null
           })}
         </div>

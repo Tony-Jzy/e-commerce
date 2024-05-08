@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import type { CartItems, Product, User } from '../../../payload/payload-types'
 
 export type CartItem = CartItems[0]
@@ -15,6 +16,10 @@ type CartAction =
     }
   | {
       type: 'ADD_ITEM'
+      payload: CartItem
+    }
+  | {
+      type: 'CHANGE_ITEM'
       payload: CartItem
     }
   | {
@@ -49,7 +54,7 @@ export const cartReducer = (cart: CartType, action: CartAction): CartType => {
           acc[indexInAcc] = {
             ...acc[indexInAcc],
             // customize the merge logic here, e.g.:
-            // quantity: acc[indexInAcc].quantity + item.quantity
+            // quantity: acc[indexInAcc].quantity + item.quantity,
           }
         } else {
           acc.push(item)
@@ -64,6 +69,39 @@ export const cartReducer = (cart: CartType, action: CartAction): CartType => {
     }
 
     case 'ADD_ITEM': {
+      // if the item is already in the cart, increase the quantity
+      const { payload: incomingItemInit } = action
+      const incomingItem = { ...incomingItemInit }
+      const productId =
+        typeof incomingItem.product === 'string' ? incomingItem.product : incomingItem?.product?.id
+
+      const indexInCart = cart?.items?.findIndex(({ product }) =>
+        typeof product === 'string' ? product === productId : product?.id === productId,
+      ) // eslint-disable-line function-paren-newline
+
+      let withAddedItem = [...(cart?.items || [])]
+
+      if (indexInCart === -1) {
+        withAddedItem.push(incomingItem)
+      }
+
+      if (typeof indexInCart === 'number' && indexInCart > -1) {
+        withAddedItem[indexInCart] = {
+          ...withAddedItem[indexInCart],
+          quantity:
+            (incomingItem.quantity || 0) > 0
+              ? incomingItem.quantity + withAddedItem[indexInCart].quantity
+              : withAddedItem[indexInCart].quantity,
+        }
+      }
+
+      return {
+        ...cart,
+        items: withAddedItem,
+      }
+    }
+
+    case 'CHANGE_ITEM': {
       // if the item is already in the cart, increase the quantity
       const { payload: incomingItem } = action
       const productId =

@@ -8,23 +8,26 @@ import { useCart } from '../../_providers/Cart'
 import { Button, Props } from '../Button'
 
 import classes from './index.module.scss'
+import toast from 'react-hot-toast'
 
 export const AddToCartButton: React.FC<{
-  product: Product
   quantity?: number
+  productId: string
   className?: string
   appearance?: Props['appearance']
+  disabled?: boolean
 }> = props => {
-  const { product, quantity, className, appearance = 'primary' } = props
+  const { quantity, productId, className, appearance = 'primary', disabled } = props
 
   const { cart, addItemToCart, isProductInCart, hasInitializedCart } = useCart()
 
-  const [isInCart, setIsInCart] = useState<boolean>()
+  let isInCart = false
+
   const router = useRouter()
 
-  useEffect(() => {
-    setIsInCart(isProductInCart(product))
-  }, [isProductInCart, product, cart])
+  // useEffect(() => {
+  //   setIsInCart(isProductInCart(product))
+  // }, [isProductInCart, product, cart])
 
   return (
     <Button
@@ -42,16 +45,24 @@ export const AddToCartButton: React.FC<{
         .filter(Boolean)
         .join(' ')}
       onClick={
-        !isInCart
-          ? () => {
+        !disabled
+          ? async () => {
+              const res = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/products/${productId}`,
+              )
+              const data = await res.json()
               addItemToCart({
-                product,
+                product: data,
                 quantity,
               })
 
+              toast.success(quantity + ' of ' + data.title + ' added to cart!')
+
               // router.push('/cart')
             }
-          : undefined
+          : () => {
+              toast.error('Please select one model from dropdown.')
+            }
       }
     />
   )

@@ -1,0 +1,21 @@
+@import '../../_css/common';
+
+.breadcrumb {
+  width: 100%;
+  max-width: max-content;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  .crumb a {
+    color: blue;
+    text-decoration: none;
+  }
+  
+  .crumb a:hover {
+    text-decoration: underline;
+  }
+  
+  .divider {
+    margin: 0 5px;
+  }

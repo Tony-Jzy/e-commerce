@@ -6,7 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost', process.env.NEXT_PUBLIC_SERVER_URL]
+    domains: ['eesupply.com.au', 'localhost', process.env.NEXT_PUBLIC_SERVER_URL]
       .filter(Boolean)
       .map(url => url.replace(/https?:\/\//, '')),
   },
@@ -44,6 +44,9 @@ const nextConfig = {
     })
 
     return headers
+  },
+  experimental: {
+    serverActions: true,
   },
 }
 

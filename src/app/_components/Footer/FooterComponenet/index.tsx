@@ -1,50 +1,38 @@
 'use client'
 
 import React from 'react'
-import { inclusions, noHeaderFooterUrls, profileNavItems } from '../../../constants'
-import { Gutter } from '../../Gutter'
-import { usePathname } from 'next/navigation'
-
-import classes from './index.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
 import { Footer, Media } from '../../../../payload/payload-types'
+import { inclusions, noHeaderFooterUrls, profileNavItems } from '../../../constants'
 import { Button } from '../../Button'
+import { Gutter } from '../../Gutter'
+
+import classes from './index.module.scss'
 
 const FooterComponent = ({ footer }: { footer: Footer }) => {
   const pathname = usePathname()
-
   const navItems = footer?.navItems || []
 
   return (
     <footer className={noHeaderFooterUrls.includes(pathname) ? classes.hide : ''}>
-      <Gutter>
-        <ul className={classes.inclusions}>
-          {inclusions.map(inclusion => (
-            <li key={inclusion.title}>
-              <Image
-                src={inclusion.icon}
-                alt={inclusion.title}
-                width={36}
-                height={36}
-                className={classes.icon}
-              />
-
-              <h5 className={classes.title}>{inclusion.title}</h5>
-              <p>{inclusion.description}</p>
-            </li>
-          ))}
-        </ul>
-      </Gutter>
-
+      <div></div>
       <div className={classes.footer}>
         <Gutter>
           <div className={classes.wrap}>
             <Link href="/">
-              <Image src="/logo-big.png" alt="logo" width={170} height={50} />
+              <Image
+                src="/logo-big-white.png"
+                alt="logo"
+                width={70}
+                height={70}
+                className={classes.logo}
+              />
             </Link>
 
-            <p>{footer.copyright}</p>
+            <p>{footer?.copyright}</p>
 
             <div className={classes.socialLinks}>
               {navItems.map(item => {

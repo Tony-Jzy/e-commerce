@@ -5,15 +5,20 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  position: relative;
 }
 
 .content {
-  padding: 8px 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
   background-color: white;
   width: 100%;
+  height: 100%;
+  padding: 15px;
 
   @include small-break {
     padding: calc(var(--base) / 2);
@@ -22,13 +27,26 @@
 }
 
 .title {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 20px; /* Adjust based on your design */
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  height: calc(100% - 25px);
+
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+}
+
+
+
+.card:hover {
+  box-shadow: 0 0 15px rgba(33,33,33,.2); 
 }
 
 .centerAlign {
@@ -73,16 +91,8 @@
   text-decoration: none;
   display: block;
   position: relative;
-  min-height: 262px;
+  min-height: 200px;
   background-color: white;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  transition: box-shadow .3s;
-
-}
-
-.mediaWrapper:hover {
-  box-shadow: 0 0 15px rgba(33,33,33,.2); 
 }
 
 .image {
@@ -90,6 +100,11 @@
   object-fit: contain;
   aspect-ratio: 1/1;
   max-width: 100%;
+  transition: 0.3s ease;
+}
+
+.card:hover .image{
+  transform: scale(1.2);
 }
 
 .placeholder {

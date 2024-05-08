@@ -1279,6 +1279,14 @@ type Product {
   enablePaywall: Boolean
   paywall: [Product_Paywall!]
   categories: [Category!]
+  isSubSKU: Boolean
+  backId: String
+  SKU: String
+  subSKU: String
+  subSKUList: String
+  priceRange: String
+  specification: String
+  images: String
   relatedProducts: [Product!]
   slug: String
   skipSync: Boolean
@@ -3605,6 +3613,14 @@ input Product_where {
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
   categories: Product_categories_operator
+  isSubSKU: Product_isSubSKU_operator
+  backId: Product_backId_operator
+  SKU: Product_SKU_operator
+  subSKU: Product_subSKU_operator
+  subSKUList: Product_subSKUList_operator
+  priceRange: Product_priceRange_operator
+  specification: Product_specification_operator
+  images: Product_images_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
   skipSync: Product_skipSync_operator
@@ -3671,6 +3687,89 @@ input Product_categories_operator {
   in: [JSON]
   not_in: [JSON]
   all: [JSON]
+  exists: Boolean
+}
+
+input Product_isSubSKU_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
+input Product_backId_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_SKU_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_subSKU_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_subSKUList_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_priceRange_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_specification_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_images_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -3779,6 +3878,14 @@ input Product_where_and {
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
   categories: Product_categories_operator
+  isSubSKU: Product_isSubSKU_operator
+  backId: Product_backId_operator
+  SKU: Product_SKU_operator
+  subSKU: Product_subSKU_operator
+  subSKUList: Product_subSKUList_operator
+  priceRange: Product_priceRange_operator
+  specification: Product_specification_operator
+  images: Product_images_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
   skipSync: Product_skipSync_operator
@@ -3800,6 +3907,14 @@ input Product_where_or {
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
   categories: Product_categories_operator
+  isSubSKU: Product_isSubSKU_operator
+  backId: Product_backId_operator
+  SKU: Product_SKU_operator
+  subSKU: Product_subSKU_operator
+  subSKUList: Product_subSKUList_operator
+  priceRange: Product_priceRange_operator
+  specification: Product_specification_operator
+  images: Product_images_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
   skipSync: Product_skipSync_operator
@@ -3832,6 +3947,14 @@ type ProductsDocAccessFields {
   enablePaywall: ProductsDocAccessFields_enablePaywall
   paywall: ProductsDocAccessFields_paywall
   categories: ProductsDocAccessFields_categories
+  isSubSKU: ProductsDocAccessFields_isSubSKU
+  backId: ProductsDocAccessFields_backId
+  SKU: ProductsDocAccessFields_SKU
+  subSKU: ProductsDocAccessFields_subSKU
+  subSKUList: ProductsDocAccessFields_subSKUList
+  priceRange: ProductsDocAccessFields_priceRange
+  specification: ProductsDocAccessFields_specification
+  images: ProductsDocAccessFields_images
   relatedProducts: ProductsDocAccessFields_relatedProducts
   slug: ProductsDocAccessFields_slug
   skipSync: ProductsDocAccessFields_skipSync
@@ -4022,6 +4145,190 @@ type ProductsDocAccessFields_categories_Update {
 }
 
 type ProductsDocAccessFields_categories_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_isSubSKU {
+  create: ProductsDocAccessFields_isSubSKU_Create
+  read: ProductsDocAccessFields_isSubSKU_Read
+  update: ProductsDocAccessFields_isSubSKU_Update
+  delete: ProductsDocAccessFields_isSubSKU_Delete
+}
+
+type ProductsDocAccessFields_isSubSKU_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_isSubSKU_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_isSubSKU_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_isSubSKU_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_backId {
+  create: ProductsDocAccessFields_backId_Create
+  read: ProductsDocAccessFields_backId_Read
+  update: ProductsDocAccessFields_backId_Update
+  delete: ProductsDocAccessFields_backId_Delete
+}
+
+type ProductsDocAccessFields_backId_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_backId_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_backId_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_backId_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_SKU {
+  create: ProductsDocAccessFields_SKU_Create
+  read: ProductsDocAccessFields_SKU_Read
+  update: ProductsDocAccessFields_SKU_Update
+  delete: ProductsDocAccessFields_SKU_Delete
+}
+
+type ProductsDocAccessFields_SKU_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_SKU_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_SKU_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_SKU_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKU {
+  create: ProductsDocAccessFields_subSKU_Create
+  read: ProductsDocAccessFields_subSKU_Read
+  update: ProductsDocAccessFields_subSKU_Update
+  delete: ProductsDocAccessFields_subSKU_Delete
+}
+
+type ProductsDocAccessFields_subSKU_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKU_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKU_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKU_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKUList {
+  create: ProductsDocAccessFields_subSKUList_Create
+  read: ProductsDocAccessFields_subSKUList_Read
+  update: ProductsDocAccessFields_subSKUList_Update
+  delete: ProductsDocAccessFields_subSKUList_Delete
+}
+
+type ProductsDocAccessFields_subSKUList_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKUList_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKUList_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_subSKUList_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_priceRange {
+  create: ProductsDocAccessFields_priceRange_Create
+  read: ProductsDocAccessFields_priceRange_Read
+  update: ProductsDocAccessFields_priceRange_Update
+  delete: ProductsDocAccessFields_priceRange_Delete
+}
+
+type ProductsDocAccessFields_priceRange_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_priceRange_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_priceRange_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_priceRange_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_specification {
+  create: ProductsDocAccessFields_specification_Create
+  read: ProductsDocAccessFields_specification_Read
+  update: ProductsDocAccessFields_specification_Update
+  delete: ProductsDocAccessFields_specification_Delete
+}
+
+type ProductsDocAccessFields_specification_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_specification_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_specification_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_specification_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_images {
+  create: ProductsDocAccessFields_images_Create
+  read: ProductsDocAccessFields_images_Read
+  update: ProductsDocAccessFields_images_Update
+  delete: ProductsDocAccessFields_images_Delete
+}
+
+type ProductsDocAccessFields_images_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_images_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_images_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_images_Delete {
   permission: Boolean!
 }
 
@@ -4353,6 +4660,14 @@ type ProductVersion_Version {
   enablePaywall: Boolean
   paywall: [ProductVersion_Version_Paywall!]
   categories: [Category!]
+  isSubSKU: Boolean
+  backId: String
+  SKU: String
+  subSKU: String
+  subSKUList: String
+  priceRange: String
+  specification: String
+  images: String
   relatedProducts: [Product!]
   slug: String
   skipSync: Boolean
@@ -4561,6 +4876,14 @@ input versionsProduct_where {
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
   version__categories: versionsProduct_version__categories_operator
+  version__isSubSKU: versionsProduct_version__isSubSKU_operator
+  version__backId: versionsProduct_version__backId_operator
+  version__SKU: versionsProduct_version__SKU_operator
+  version__subSKU: versionsProduct_version__subSKU_operator
+  version__subSKUList: versionsProduct_version__subSKUList_operator
+  version__priceRange: versionsProduct_version__priceRange_operator
+  version__specification: versionsProduct_version__specification_operator
+  version__images: versionsProduct_version__images_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
   version__skipSync: versionsProduct_version__skipSync_operator
@@ -4639,6 +4962,89 @@ input versionsProduct_version__categories_operator {
   in: [JSON]
   not_in: [JSON]
   all: [JSON]
+  exists: Boolean
+}
+
+input versionsProduct_version__isSubSKU_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
+input versionsProduct_version__backId_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__SKU_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__subSKU_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__subSKUList_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__priceRange_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__specification_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__images_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -4776,6 +5182,14 @@ input versionsProduct_where_and {
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
   version__categories: versionsProduct_version__categories_operator
+  version__isSubSKU: versionsProduct_version__isSubSKU_operator
+  version__backId: versionsProduct_version__backId_operator
+  version__SKU: versionsProduct_version__SKU_operator
+  version__subSKU: versionsProduct_version__subSKU_operator
+  version__subSKUList: versionsProduct_version__subSKUList_operator
+  version__priceRange: versionsProduct_version__priceRange_operator
+  version__specification: versionsProduct_version__specification_operator
+  version__images: versionsProduct_version__images_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
   version__skipSync: versionsProduct_version__skipSync_operator
@@ -4801,6 +5215,14 @@ input versionsProduct_where_or {
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
   version__categories: versionsProduct_version__categories_operator
+  version__isSubSKU: versionsProduct_version__isSubSKU_operator
+  version__backId: versionsProduct_version__backId_operator
+  version__SKU: versionsProduct_version__SKU_operator
+  version__subSKU: versionsProduct_version__subSKU_operator
+  version__subSKUList: versionsProduct_version__subSKUList_operator
+  version__priceRange: versionsProduct_version__priceRange_operator
+  version__specification: versionsProduct_version__specification_operator
+  version__images: versionsProduct_version__images_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
   version__skipSync: versionsProduct_version__skipSync_operator
@@ -4836,6 +5258,16 @@ type User {
   stripeCustomerID: String
   cart: User_Cart
   skipSync: Boolean
+  phoneNumber: String
+  businessName: String
+  position: String
+  ABN: String
+  ACN: String
+  address_1: String
+  address_2: String
+  state: String
+  suburb: String
+  postcode: String
   updatedAt: DateTime
   createdAt: DateTime
   email: EmailAddress!
@@ -6215,6 +6647,16 @@ input User_where {
   cart__items__quantity: User_cart__items__quantity_operator
   cart__items__id: User_cart__items__id_operator
   skipSync: User_skipSync_operator
+  phoneNumber: User_phoneNumber_operator
+  businessName: User_businessName_operator
+  position: User_position_operator
+  ABN: User_ABN_operator
+  ACN: User_ACN_operator
+  address_1: User_address_1_operator
+  address_2: User_address_2_operator
+  state: User_state_operator
+  suburb: User_suburb_operator
+  postcode: User_postcode_operator
   updatedAt: User_updatedAt_operator
   createdAt: User_createdAt_operator
   email: User_email_operator
@@ -6305,6 +6747,116 @@ input User_skipSync_operator {
   exists: Boolean
 }
 
+input User_phoneNumber_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_businessName_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_position_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_ABN_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_ACN_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_address_1_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_address_2_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_state_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_suburb_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_postcode_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input User_updatedAt_operator {
   equals: DateTime
   not_equals: DateTime
@@ -6357,6 +6909,16 @@ input User_where_and {
   cart__items__quantity: User_cart__items__quantity_operator
   cart__items__id: User_cart__items__id_operator
   skipSync: User_skipSync_operator
+  phoneNumber: User_phoneNumber_operator
+  businessName: User_businessName_operator
+  position: User_position_operator
+  ABN: User_ABN_operator
+  ACN: User_ACN_operator
+  address_1: User_address_1_operator
+  address_2: User_address_2_operator
+  state: User_state_operator
+  suburb: User_suburb_operator
+  postcode: User_postcode_operator
   updatedAt: User_updatedAt_operator
   createdAt: User_createdAt_operator
   email: User_email_operator
@@ -6374,6 +6936,16 @@ input User_where_or {
   cart__items__quantity: User_cart__items__quantity_operator
   cart__items__id: User_cart__items__id_operator
   skipSync: User_skipSync_operator
+  phoneNumber: User_phoneNumber_operator
+  businessName: User_businessName_operator
+  position: User_position_operator
+  ABN: User_ABN_operator
+  ACN: User_ACN_operator
+  address_1: User_address_1_operator
+  address_2: User_address_2_operator
+  state: User_state_operator
+  suburb: User_suburb_operator
+  postcode: User_postcode_operator
   updatedAt: User_updatedAt_operator
   createdAt: User_createdAt_operator
   email: User_email_operator
@@ -6398,6 +6970,16 @@ type UsersDocAccessFields {
   stripeCustomerID: UsersDocAccessFields_stripeCustomerID
   cart: UsersDocAccessFields_cart
   skipSync: UsersDocAccessFields_skipSync
+  phoneNumber: UsersDocAccessFields_phoneNumber
+  businessName: UsersDocAccessFields_businessName
+  position: UsersDocAccessFields_position
+  ABN: UsersDocAccessFields_ABN
+  ACN: UsersDocAccessFields_ACN
+  address_1: UsersDocAccessFields_address_1
+  address_2: UsersDocAccessFields_address_2
+  state: UsersDocAccessFields_state
+  suburb: UsersDocAccessFields_suburb
+  postcode: UsersDocAccessFields_postcode
   updatedAt: UsersDocAccessFields_updatedAt
   createdAt: UsersDocAccessFields_createdAt
   email: UsersDocAccessFields_email
@@ -6643,6 +7225,236 @@ type UsersDocAccessFields_skipSync_Update {
 }
 
 type UsersDocAccessFields_skipSync_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_phoneNumber {
+  create: UsersDocAccessFields_phoneNumber_Create
+  read: UsersDocAccessFields_phoneNumber_Read
+  update: UsersDocAccessFields_phoneNumber_Update
+  delete: UsersDocAccessFields_phoneNumber_Delete
+}
+
+type UsersDocAccessFields_phoneNumber_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_phoneNumber_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_phoneNumber_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_phoneNumber_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_businessName {
+  create: UsersDocAccessFields_businessName_Create
+  read: UsersDocAccessFields_businessName_Read
+  update: UsersDocAccessFields_businessName_Update
+  delete: UsersDocAccessFields_businessName_Delete
+}
+
+type UsersDocAccessFields_businessName_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_businessName_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_businessName_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_businessName_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_position {
+  create: UsersDocAccessFields_position_Create
+  read: UsersDocAccessFields_position_Read
+  update: UsersDocAccessFields_position_Update
+  delete: UsersDocAccessFields_position_Delete
+}
+
+type UsersDocAccessFields_position_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_position_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_position_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_position_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ABN {
+  create: UsersDocAccessFields_ABN_Create
+  read: UsersDocAccessFields_ABN_Read
+  update: UsersDocAccessFields_ABN_Update
+  delete: UsersDocAccessFields_ABN_Delete
+}
+
+type UsersDocAccessFields_ABN_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ABN_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ABN_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ABN_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ACN {
+  create: UsersDocAccessFields_ACN_Create
+  read: UsersDocAccessFields_ACN_Read
+  update: UsersDocAccessFields_ACN_Update
+  delete: UsersDocAccessFields_ACN_Delete
+}
+
+type UsersDocAccessFields_ACN_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ACN_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ACN_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_ACN_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_1 {
+  create: UsersDocAccessFields_address_1_Create
+  read: UsersDocAccessFields_address_1_Read
+  update: UsersDocAccessFields_address_1_Update
+  delete: UsersDocAccessFields_address_1_Delete
+}
+
+type UsersDocAccessFields_address_1_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_1_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_1_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_1_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_2 {
+  create: UsersDocAccessFields_address_2_Create
+  read: UsersDocAccessFields_address_2_Read
+  update: UsersDocAccessFields_address_2_Update
+  delete: UsersDocAccessFields_address_2_Delete
+}
+
+type UsersDocAccessFields_address_2_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_2_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_2_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_address_2_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_state {
+  create: UsersDocAccessFields_state_Create
+  read: UsersDocAccessFields_state_Read
+  update: UsersDocAccessFields_state_Update
+  delete: UsersDocAccessFields_state_Delete
+}
+
+type UsersDocAccessFields_state_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_state_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_state_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_state_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_suburb {
+  create: UsersDocAccessFields_suburb_Create
+  read: UsersDocAccessFields_suburb_Read
+  update: UsersDocAccessFields_suburb_Update
+  delete: UsersDocAccessFields_suburb_Delete
+}
+
+type UsersDocAccessFields_suburb_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_suburb_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_suburb_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_suburb_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_postcode {
+  create: UsersDocAccessFields_postcode_Create
+  read: UsersDocAccessFields_postcode_Read
+  update: UsersDocAccessFields_postcode_Update
+  delete: UsersDocAccessFields_postcode_Delete
+}
+
+type UsersDocAccessFields_postcode_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_postcode_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_postcode_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_postcode_Delete {
   permission: Boolean!
 }
 
@@ -9553,6 +10365,14 @@ type ProductsFields {
   enablePaywall: ProductsFields_enablePaywall
   paywall: ProductsFields_paywall
   categories: ProductsFields_categories
+  isSubSKU: ProductsFields_isSubSKU
+  backId: ProductsFields_backId
+  SKU: ProductsFields_SKU
+  subSKU: ProductsFields_subSKU
+  subSKUList: ProductsFields_subSKUList
+  priceRange: ProductsFields_priceRange
+  specification: ProductsFields_specification
+  images: ProductsFields_images
   relatedProducts: ProductsFields_relatedProducts
   slug: ProductsFields_slug
   skipSync: ProductsFields_skipSync
@@ -9743,6 +10563,190 @@ type ProductsFields_categories_Update {
 }
 
 type ProductsFields_categories_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_isSubSKU {
+  create: ProductsFields_isSubSKU_Create
+  read: ProductsFields_isSubSKU_Read
+  update: ProductsFields_isSubSKU_Update
+  delete: ProductsFields_isSubSKU_Delete
+}
+
+type ProductsFields_isSubSKU_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_isSubSKU_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_isSubSKU_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_isSubSKU_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_backId {
+  create: ProductsFields_backId_Create
+  read: ProductsFields_backId_Read
+  update: ProductsFields_backId_Update
+  delete: ProductsFields_backId_Delete
+}
+
+type ProductsFields_backId_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_backId_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_backId_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_backId_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_SKU {
+  create: ProductsFields_SKU_Create
+  read: ProductsFields_SKU_Read
+  update: ProductsFields_SKU_Update
+  delete: ProductsFields_SKU_Delete
+}
+
+type ProductsFields_SKU_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_SKU_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_SKU_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_SKU_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKU {
+  create: ProductsFields_subSKU_Create
+  read: ProductsFields_subSKU_Read
+  update: ProductsFields_subSKU_Update
+  delete: ProductsFields_subSKU_Delete
+}
+
+type ProductsFields_subSKU_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKU_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKU_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKU_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKUList {
+  create: ProductsFields_subSKUList_Create
+  read: ProductsFields_subSKUList_Read
+  update: ProductsFields_subSKUList_Update
+  delete: ProductsFields_subSKUList_Delete
+}
+
+type ProductsFields_subSKUList_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKUList_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKUList_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_subSKUList_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_priceRange {
+  create: ProductsFields_priceRange_Create
+  read: ProductsFields_priceRange_Read
+  update: ProductsFields_priceRange_Update
+  delete: ProductsFields_priceRange_Delete
+}
+
+type ProductsFields_priceRange_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_priceRange_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_priceRange_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_priceRange_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_specification {
+  create: ProductsFields_specification_Create
+  read: ProductsFields_specification_Read
+  update: ProductsFields_specification_Update
+  delete: ProductsFields_specification_Delete
+}
+
+type ProductsFields_specification_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_specification_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_specification_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_specification_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_images {
+  create: ProductsFields_images_Create
+  read: ProductsFields_images_Read
+  update: ProductsFields_images_Update
+  delete: ProductsFields_images_Delete
+}
+
+type ProductsFields_images_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_images_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_images_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_images_Delete {
   permission: Boolean!
 }
 
@@ -10893,6 +11897,16 @@ type UsersFields {
   stripeCustomerID: UsersFields_stripeCustomerID
   cart: UsersFields_cart
   skipSync: UsersFields_skipSync
+  phoneNumber: UsersFields_phoneNumber
+  businessName: UsersFields_businessName
+  position: UsersFields_position
+  ABN: UsersFields_ABN
+  ACN: UsersFields_ACN
+  address_1: UsersFields_address_1
+  address_2: UsersFields_address_2
+  state: UsersFields_state
+  suburb: UsersFields_suburb
+  postcode: UsersFields_postcode
   updatedAt: UsersFields_updatedAt
   createdAt: UsersFields_createdAt
   email: UsersFields_email
@@ -11138,6 +12152,236 @@ type UsersFields_skipSync_Update {
 }
 
 type UsersFields_skipSync_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_phoneNumber {
+  create: UsersFields_phoneNumber_Create
+  read: UsersFields_phoneNumber_Read
+  update: UsersFields_phoneNumber_Update
+  delete: UsersFields_phoneNumber_Delete
+}
+
+type UsersFields_phoneNumber_Create {
+  permission: Boolean!
+}
+
+type UsersFields_phoneNumber_Read {
+  permission: Boolean!
+}
+
+type UsersFields_phoneNumber_Update {
+  permission: Boolean!
+}
+
+type UsersFields_phoneNumber_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_businessName {
+  create: UsersFields_businessName_Create
+  read: UsersFields_businessName_Read
+  update: UsersFields_businessName_Update
+  delete: UsersFields_businessName_Delete
+}
+
+type UsersFields_businessName_Create {
+  permission: Boolean!
+}
+
+type UsersFields_businessName_Read {
+  permission: Boolean!
+}
+
+type UsersFields_businessName_Update {
+  permission: Boolean!
+}
+
+type UsersFields_businessName_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_position {
+  create: UsersFields_position_Create
+  read: UsersFields_position_Read
+  update: UsersFields_position_Update
+  delete: UsersFields_position_Delete
+}
+
+type UsersFields_position_Create {
+  permission: Boolean!
+}
+
+type UsersFields_position_Read {
+  permission: Boolean!
+}
+
+type UsersFields_position_Update {
+  permission: Boolean!
+}
+
+type UsersFields_position_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_ABN {
+  create: UsersFields_ABN_Create
+  read: UsersFields_ABN_Read
+  update: UsersFields_ABN_Update
+  delete: UsersFields_ABN_Delete
+}
+
+type UsersFields_ABN_Create {
+  permission: Boolean!
+}
+
+type UsersFields_ABN_Read {
+  permission: Boolean!
+}
+
+type UsersFields_ABN_Update {
+  permission: Boolean!
+}
+
+type UsersFields_ABN_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_ACN {
+  create: UsersFields_ACN_Create
+  read: UsersFields_ACN_Read
+  update: UsersFields_ACN_Update
+  delete: UsersFields_ACN_Delete
+}
+
+type UsersFields_ACN_Create {
+  permission: Boolean!
+}
+
+type UsersFields_ACN_Read {
+  permission: Boolean!
+}
+
+type UsersFields_ACN_Update {
+  permission: Boolean!
+}
+
+type UsersFields_ACN_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_address_1 {
+  create: UsersFields_address_1_Create
+  read: UsersFields_address_1_Read
+  update: UsersFields_address_1_Update
+  delete: UsersFields_address_1_Delete
+}
+
+type UsersFields_address_1_Create {
+  permission: Boolean!
+}
+
+type UsersFields_address_1_Read {
+  permission: Boolean!
+}
+
+type UsersFields_address_1_Update {
+  permission: Boolean!
+}
+
+type UsersFields_address_1_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_address_2 {
+  create: UsersFields_address_2_Create
+  read: UsersFields_address_2_Read
+  update: UsersFields_address_2_Update
+  delete: UsersFields_address_2_Delete
+}
+
+type UsersFields_address_2_Create {
+  permission: Boolean!
+}
+
+type UsersFields_address_2_Read {
+  permission: Boolean!
+}
+
+type UsersFields_address_2_Update {
+  permission: Boolean!
+}
+
+type UsersFields_address_2_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_state {
+  create: UsersFields_state_Create
+  read: UsersFields_state_Read
+  update: UsersFields_state_Update
+  delete: UsersFields_state_Delete
+}
+
+type UsersFields_state_Create {
+  permission: Boolean!
+}
+
+type UsersFields_state_Read {
+  permission: Boolean!
+}
+
+type UsersFields_state_Update {
+  permission: Boolean!
+}
+
+type UsersFields_state_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_suburb {
+  create: UsersFields_suburb_Create
+  read: UsersFields_suburb_Read
+  update: UsersFields_suburb_Update
+  delete: UsersFields_suburb_Delete
+}
+
+type UsersFields_suburb_Create {
+  permission: Boolean!
+}
+
+type UsersFields_suburb_Read {
+  permission: Boolean!
+}
+
+type UsersFields_suburb_Update {
+  permission: Boolean!
+}
+
+type UsersFields_suburb_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_postcode {
+  create: UsersFields_postcode_Create
+  read: UsersFields_postcode_Read
+  update: UsersFields_postcode_Update
+  delete: UsersFields_postcode_Delete
+}
+
+type UsersFields_postcode_Create {
+  permission: Boolean!
+}
+
+type UsersFields_postcode_Read {
+  permission: Boolean!
+}
+
+type UsersFields_postcode_Update {
+  permission: Boolean!
+}
+
+type UsersFields_postcode_Delete {
   permission: Boolean!
 }
 
@@ -12671,6 +13915,14 @@ input mutationProductInput {
   enablePaywall: Boolean
   paywall: JSON
   categories: [String]
+  isSubSKU: Boolean
+  backId: String
+  SKU: String
+  subSKU: String
+  subSKUList: String
+  priceRange: String
+  specification: String
+  images: String
   relatedProducts: [String]
   slug: String
   skipSync: Boolean
@@ -12700,6 +13952,14 @@ input mutationProductUpdateInput {
   enablePaywall: Boolean
   paywall: JSON
   categories: [String]
+  isSubSKU: Boolean
+  backId: String
+  SKU: String
+  subSKU: String
+  subSKUList: String
+  priceRange: String
+  specification: String
+  images: String
   relatedProducts: [String]
   slug: String
   skipSync: Boolean
@@ -12817,6 +14077,16 @@ input mutationUserInput {
   stripeCustomerID: String
   cart: mutationUser_CartInput
   skipSync: Boolean
+  phoneNumber: String
+  businessName: String
+  position: String
+  ABN: String
+  ACN: String
+  address_1: String
+  address_2: String
+  state: String
+  suburb: String
+  postcode: String
   updatedAt: String
   createdAt: String
   email: String!
@@ -12852,6 +14122,16 @@ input mutationUserUpdateInput {
   stripeCustomerID: String
   cart: mutationUserUpdate_CartInput
   skipSync: Boolean
+  phoneNumber: String
+  businessName: String
+  position: String
+  ABN: String
+  ACN: String
+  address_1: String
+  address_2: String
+  state: String
+  suburb: String
+  postcode: String
   updatedAt: String
   createdAt: String
   email: String

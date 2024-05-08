@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback } from 'react'
-import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { PaymentElement, AddressElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useRouter } from 'next/navigation'
 
 import { Order } from '../../../../payload/payload-types'
@@ -40,11 +40,45 @@ export const CheckoutForm: React.FC<{}> = () => {
         }
 
         if (paymentIntent) {
+          const gstPercentage = 10 // GST rate
+          const gstAmount = Math.round((cartTotal.raw * gstPercentage) / 100) / 100
+          const totalAmount = (cartTotal.raw + gstAmount * 100) / 100 // Total includes GST
+
           // Before redirecting to the order confirmation page, we need to create the order in Payload
           // Cannot clear the cart yet because if you clear the cart while in the checkout
           // you will be redirected to the `/cart` page before this redirect happens
           // Instead, we clear the cart in an `afterChange` hook on the `orders` collection in Payload
           try {
+            // const orderBackend = await fetch(
+            //   `${process.env.NEXT_PUBLIC_EE_SUPPLY_SERVER_URL}/api/orders/create`,
+            //   {
+            //     method: 'POST',
+            //     credentials: 'include',
+            //     headers: {
+            //       'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({
+            //       gst: gstAmount,
+            //       net_total: totalAmount,
+            //       shipping: paymentIntent.shipping,
+            //       items: (cart?.items || [])?.map(({ product, quantity }) => ({
+            //         productId:
+            //           typeof product === 'string'
+            //             ? product
+            //             : JSON.parse(product.subSKUList)[0].backId,
+            //         quantity,
+            //         price:
+            //           typeof product === 'object'
+            //             ? JSON.parse(product.subSKUList)[0].price
+            //             : undefined,
+            //         // typeof product === 'object'
+            //         //   ? JSON.parse(product.subSKUList)[0].price
+            //         //   : undefined,
+            //       })),
+            //     }),
+            //   },
+            // )
+
             const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
               method: 'POST',
               credentials: 'include',
@@ -59,8 +93,11 @@ export const CheckoutForm: React.FC<{}> = () => {
                   quantity,
                   price:
                     typeof product === 'object'
-                      ? priceFromJSON(product.priceJSON, 1, true)
+                      ? priceFromJSON(product.priceJSON, 1, '', '', true)
                       : undefined,
+                  // typeof product === 'object'
+                  //   ? JSON.parse(product.subSKUList)[0].price
+                  //   : undefined,
                 })),
               }),
             })
@@ -98,6 +135,21 @@ export const CheckoutForm: React.FC<{}> = () => {
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
       {error && <Message error={error} />}
+      <AddressElement
+        options={{
+          mode: 'shipping',
+          allowedCountries: ['AU'],
+          blockPoBox: true,
+          fields: {
+            phone: 'always',
+          },
+          validation: {
+            phone: {
+              required: 'always',
+            },
+          },
+        }}
+      />
       <PaymentElement />
       <div className={classes.actions}>
         <Button label="Back to cart" href="/cart" appearance="secondary" />

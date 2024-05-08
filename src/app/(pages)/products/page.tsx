@@ -10,8 +10,12 @@ import { draftMode } from 'next/headers'
 import { fetchDocs } from '../../_api/fetchDocs'
 import { HR } from '../../_components/HR'
 import SearchBar from '../../_components/SearchBar'
+import { generateMeta } from '../../_utilities/generateMeta'
+import { productsPage } from '../../../payload/seed/products-page'
+import { Metadata } from 'next'
+import ScrollUp from '../../_components/ScrollUp'
 
-const Products = async () => {
+export default async function Products() {
   const { isEnabled: isDraftMode } = draftMode()
 
   let page: Page | null = null
@@ -24,10 +28,6 @@ const Products = async () => {
       draft: isDraftMode,
     })
 
-    // console.log('[product page fetched start]-----')
-    // console.log(page)
-    // console.log('[product page fetched end]-----')
-
     categories = await fetchDocs<Category>('categories')
   } catch (error) {
     console.log(error)
@@ -35,15 +35,38 @@ const Products = async () => {
 
   return (
     <div className={classes.container}>
-      <SearchBar />
       <Gutter className={classes.products}>
         <Filters categories={categories} />
 
-        <Blocks blocks={page?.layout} disableTopPadding={true} />
+        <div>
+          <SearchBar />
+          <Blocks blocks={page?.layout} disableTopPadding={true} />
+        </div>
       </Gutter>
       <HR />
+
+      <ScrollUp />
     </div>
   )
 }
 
-export default Products
+export async function generateMetadata({ params: { slug = 'products' } }): Promise<Metadata> {
+  const { isEnabled: isDraftMode } = draftMode()
+
+  let page: Page | null = null
+
+  try {
+    page = await fetchDoc<Page>({
+      collection: 'pages',
+      slug,
+      draft: isDraftMode,
+    })
+  } catch (error) {
+    // don't throw an error if the fetch fails
+    // this is so that we can render a static home page for the demo
+    // when deploying this template on Payload Cloud, this page needs to build before the APIs are live
+    // in production you may want to redirect to a 404  page or at least log the error somewhere
+  }
+
+  return generateMeta({ doc: page })
+}

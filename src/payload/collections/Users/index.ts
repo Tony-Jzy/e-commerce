@@ -157,6 +157,56 @@ const Users: CollectionConfig = {
         hidden: true,
       },
     },
+    {
+      name: 'phoneNumber',
+      label: 'Phone Number',
+      type: 'text',
+    },
+    {
+      name: 'businessName',
+      label: 'Business Name',
+      type: 'text',
+    },
+    {
+      name: 'position',
+      label: 'Position',
+      type: 'text',
+    },
+    {
+      name: 'ABN',
+      label: 'ABN',
+      type: 'text',
+    },
+    {
+      name: 'ACN',
+      label: 'ACN',
+      type: 'text',
+    },
+    {
+      name: 'address_1',
+      label: 'Address Line 1',
+      type: 'text',
+    },
+    {
+      name: 'address_2',
+      label: 'Address Line 2',
+      type: 'text',
+    },
+    {
+      name: 'state',
+      label: 'State',
+      type: 'text',
+    },
+    {
+      name: 'suburb',
+      label: 'suburb',
+      type: 'text',
+    },
+    {
+      name: 'postcode',
+      label: 'Postcode',
+      type: 'text',
+    },
   ],
   timestamps: true,
 }

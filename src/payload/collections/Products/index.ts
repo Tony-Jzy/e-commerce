@@ -129,6 +129,51 @@ const Products: CollectionConfig = {
       },
     },
     {
+      name: 'isSubSKU',
+      label: 'Is this a Sub SKU?',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        hidden: true,
+      },
+    },
+    {
+      name: 'backId',
+      label: 'Back ID',
+      type: 'text',
+    },
+    {
+      name: 'SKU',
+      label: 'SKU',
+      type: 'text',
+    },
+    {
+      name: 'subSKU',
+      label: 'Sub SKU',
+      type: 'text',
+    },
+    {
+      name: 'subSKUList',
+      label: 'Sub SKU List',
+      type: 'text',
+    },
+    {
+      name: 'priceRange',
+      label: 'Price Range',
+      type: 'text',
+    },
+    {
+      name: 'specification',
+      label: 'Specification',
+      type: 'text',
+    },
+    {
+      name: 'images',
+      label: 'Images',
+      type: 'text',
+    },
+    {
       name: 'relatedProducts',
       type: 'relationship',
       relationTo: 'products',

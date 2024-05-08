@@ -383,6 +383,14 @@ export interface Product {
       )[]
     | null;
   categories?: (string | Category)[] | null;
+  isSubSKU?: boolean | null;
+  backId?: string | null;
+  SKU?: string | null;
+  subSKU?: string | null;
+  subSKUList?: string | null;
+  priceRange?: string | null;
+  specification?: string | null;
+  images?: string | null;
   relatedProducts?: (string | Product)[] | null;
   slug?: string | null;
   skipSync?: boolean | null;
@@ -421,6 +429,16 @@ export interface User {
     items?: CartItems;
   };
   skipSync?: boolean | null;
+  phoneNumber?: string | null;
+  businessName?: string | null;
+  position?: string | null;
+  ABN?: string | null;
+  ACN?: string | null;
+  address_1?: string | null;
+  address_2?: string | null;
+  state?: string | null;
+  suburb?: string | null;
+  postcode?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;

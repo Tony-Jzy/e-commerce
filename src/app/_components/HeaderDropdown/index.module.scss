@@ -1,0 +1,140 @@
+
+@use '../../_css/queries.scss' as *;
+@import '../../_css/common';
+
+.dropdownContainer{
+    width: 100%;
+    position: fixed;
+    top: 100px;
+    z-index: 1000;
+    background: transparent;
+    display: flex;
+    justify-content: right;
+    // transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: visibility 0.2s, opacity 0.2s linear;
+    // transform: translateY(0);
+    opacity: 1;
+    
+    @include mid-break {
+        top: 120px;
+        justify-content: center;
+    }
+    
+    @include small-break {
+        top: 100px;
+        justify-content: center;
+    }
+}
+
+.wrap{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    
+    @include mid-break {
+        justify-content: center;
+    }
+}
+
+.scrolled{
+    top: 45px;
+    
+    @include mid-break {
+        top: 80px;
+        justify-content: center;
+    }
+}
+
+.hide{
+    display: none;
+}
+
+.menuContainer{
+    width:493px;
+    // background-color: white;
+    // box-shadow:  0 1px 10px rgba(0, 0, 0, 0.1);
+    padding-left: 45px;
+    padding-top: 15px;
+    
+    
+    @include small-break {
+        width: 410px;
+        padding-left: 25px;
+    }
+    
+}
+
+.user{
+    width:460px;
+    
+    @include small-break {
+        width: 390px;
+    }
+}
+
+.menu{
+    min-width: 85px;
+    max-width: 165px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    color: black;
+    background: white;
+    box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu li {
+    @extend %label;
+    list-style: none;
+    padding: 10px 0;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.translateY100{
+    // display: none;
+    // transform: translateY(-50%);
+    visibility: hidden;
+    opacity: 0;
+    transition-delay: 0.1s;
+    
+    // transform: translateY(0);
+    // opacity: 1;
+}
+
+
+.button {
+    min-width: 150px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-flex;
+    padding: 15px 10px;
+    font-family: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    border-radius: 10px;
+    transition: 0.1s ease-in-out;
+    font-weight: 600;
+  
+    @include small-break {
+      min-width: 135px;
+    }
+  }
+  
+  .button:hover{
+    text-decoration: underline;
+    color: black;
+    background-color: var(--theme-elevation-100);
+  }
+

@@ -9,7 +9,13 @@ const Categories = ({ categories }: { categories: Category[] }) => {
   return (
     <section className={classes.container}>
       <div className={classes.titleWrapper}>
-        <h3>Shop by Categories</h3>
+        <div>
+          <h2>Shop by Categories</h2>
+          <p>
+            EE Corporation offers all the tools, parts, pieces, storage and accessories you can
+            think of.
+          </p>
+        </div>
         <Link href="/products">Show All</Link>
       </div>
 

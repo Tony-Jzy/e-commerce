@@ -1,0 +1,81 @@
+@import '../../../_css/common';
+
+.inputWrap {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  font-family: system-ui;
+  border-radius: 2px;
+  box-shadow: none;
+  border: 1px solid var(--color-gray-500);
+  background: none;
+  background-color: white;
+  color: var(--theme-elevation-1000);
+  height: 35px;
+  line-height: 35px;
+  padding: 16px;
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--theme-text);
+    -webkit-box-shadow: 0 0 0px 1000px var(--theme-elevation-150) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+.disabled{
+  background-color: var(--theme-elevation-100);
+}
+
+.asterisk {
+  color: var(--color-error-500);
+}
+
+.hint{
+  color: var(--theme-elevation-500);
+  font-size: 12px;
+}
+
+:global([data-theme="dark"]) {
+  .input {
+    background-color: var(--theme-elevation-150);
+  }
+}
+
+.error {
+  background-color: var(--theme-error-150);
+}
+
+.label {
+  margin-bottom: 0;
+  display: block;
+  line-height: 1;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.errorMessage {
+  font-size: small;
+  line-height: 1.25;
+  margin-top: 4px;
+  color: red;
+}
+
+.inputContainer{
+  display: flex;
+  gap: 5px;
+}
+
+.sendCode{
+  min-width: 100px;
+  padding: 0 6px;
+  border-radius: 5px
+}

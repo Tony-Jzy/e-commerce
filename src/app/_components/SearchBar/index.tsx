@@ -3,26 +3,25 @@ import { useState, useEffect } from 'react'
 
 import classes from './index.module.scss'
 import { Button } from '../Button'
+import { useFilter } from '../../_providers/Filter'
+import Image from 'next/image'
 
 const SearchBar = () => {
+  const { titleSearch, setTitleSearch } = useFilter()
   const [query, setQuery] = useState('')
-  const [results, setResults] = useState([])
-  const [showDropdown, setShowDropdown] = useState(false)
+  const [show, setShow] = useState(false)
+
+  const handleChange = e => {
+    setQuery(e.target.value)
+    setTitleSearch(e.target.value)
+  }
 
   useEffect(() => {
-    const fetchResults = async () => {
-      // if (query.length > 2) {
-      // Fetch results when query length is more than 2 characters
-      // const response = await fetch(`/api/search?q=${query}`)
-      // const data = await response.json()
-      // setResults(data)
-      setShowDropdown(true)
-      // } else {
-      //   setShowDropdown(false)
-      // }
+    if (query.length > 0) {
+      setShow(true)
+    } else {
+      setShow(false)
     }
-
-    fetchResults()
   }, [query])
 
   return (
@@ -32,31 +31,19 @@ const SearchBar = () => {
           type="text"
           className={classes.search_input}
           value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Search For Products..."
+          onChange={e => handleChange(e)}
+          placeholder="Search products by name..."
         />
-
-        <Button
-          el="button"
-          label="search"
-          appearance="primary"
-          className={classes.search_btn}
-          onClick={() => (window.location.href = 'login')}
-        />
+        <button
+          className={[classes.reset, show && classes.show].join(' ')}
+          onClick={() => {
+            setQuery('')
+            setTitleSearch('')
+          }}
+        >
+          <Image src="/assets/icons/close.svg" alt="left arrow" width={24} height={24} />
+        </button>
       </div>
-      {showDropdown && (
-        <div className={classes.dropdown}>
-          {results.map(result => (
-            <div key={result.id} className={classes.dropdownItem}>
-              <img src={result.image} alt={result.title} />
-              <div>
-                <h4>{result.title}</h4>
-                <p>${result.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }

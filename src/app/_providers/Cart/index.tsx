@@ -17,6 +17,7 @@ import { CartItem, cartReducer } from './reducer'
 export type CartContext = {
   cart: User['cart']
   addItemToCart: (item: CartItem) => void
+  changeItemToCart: (item: CartItem) => void
   deleteItemFromCart: (product: Product) => void
   cartIsEmpty: boolean | undefined
   clearCart: () => void
@@ -37,7 +38,7 @@ const arrayHasItems = array => Array.isArray(array) && array.length > 0
 // Step 1: Check local storage for a cart
 // Step 2: If there is a cart, fetch the products and hydrate the cart
 // Step 3: Authenticate the user
-// Step 4: If the user is authenticated, merge the user's cart with the local cart
+// Step 4: If the user is authenticated, merge the user's cart with the local  cart
 // Step 4B: Sync the cart to Payload and clear local storage
 // Step 5: If the user is logged out, sync the cart to local storage only
 
@@ -210,6 +211,14 @@ export const CartProvider = props => {
     })
   }, [])
 
+  // this method can be used to add new items AND update existing ones
+  const changeItemToCart = useCallback(incomingItem => {
+    dispatchCart({
+      type: 'CHANGE_ITEM',
+      payload: incomingItem,
+    })
+  }, [])
+
   const deleteItemFromCart = useCallback((incomingProduct: Product) => {
     dispatchCart({
       type: 'DELETE_ITEM',
@@ -229,11 +238,26 @@ export const CartProvider = props => {
 
     const newTotal =
       cart?.items?.reduce((acc, item) => {
+        let packCount = 1
+
+        if (typeof item.product === 'object') {
+          const ifPacked = item.product.title.indexOf('Pack') > -1
+          const regex = /\(Pack:\s*(\d+)\)/
+          const match = item.product.title.match(regex)
+          packCount = ifPacked ? (match ? parseInt(match[1]) : 1) : 1
+        }
+
         return (
           acc +
+          // (typeof item.product === 'object'
+          //   ? JSON.parse(item?.product?.priceJSON || '{}')?.data?.[0]?.unit_amount *
+          //     (typeof item?.quantity === 'number' ? item?.quantity : 0)
+          //   : 0)
           (typeof item.product === 'object'
-            ? JSON.parse(item?.product?.priceJSON || '{}')?.data?.[0]?.unit_amount *
-              (typeof item?.quantity === 'number' ? item?.quantity : 0)
+            ? JSON.parse(item?.product?.subSKUList || '{}')?.[0]?.price *
+              (typeof item?.quantity === 'number' ? item?.quantity : 0) *
+              packCount *
+              100
             : 0)
         )
       }, 0) || 0
@@ -241,7 +265,7 @@ export const CartProvider = props => {
     setTotal({
       formatted: (newTotal / 100).toLocaleString('en-US', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'aud',
       }),
       raw: newTotal,
     })
@@ -252,6 +276,7 @@ export const CartProvider = props => {
       value={{
         cart,
         addItemToCart,
+        changeItemToCart,
         deleteItemFromCart,
         cartIsEmpty: hasInitializedCart && !arrayHasItems(cart?.items),
         clearCart,

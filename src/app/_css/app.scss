@@ -44,6 +44,10 @@ body,
   height: 100%;
 }
 
+.scroll-smooth {
+  scroll-behavior: smooth !important;
+}
+
 body {
   font-family: var(--font-jost);
   margin: 0;
@@ -55,8 +59,16 @@ body {
 }
 
 .main{
+  margin-top: 135px;
   flex: 1 1 auto;
-  padding-top: 50px;
+
+  @include mid-break {
+    margin-top: 145px;
+  }
+
+  @include small-break {
+    margin-top: 100px;
+  }
 }
 
 ::selection {

@@ -5,28 +5,28 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-  margin-top: -50px;
 
-  
+  @include small-break {
+    margin: 0;
+  }
+}
+
+.heroWrapper {
+  background-color: var(--color-dark-50);
+  width: 100%;
+  max-width: 1560px;
+  max-height: 884px;
+  display: flex;
+  align-items: center;
 
   background-size: cover;
   background-position: revert;
   background-repeat: no-repeat;
 
   @include small-break {
-    margin-top: -50px;
     background-size: cover;
     background-position: center;
   }
-}
-
-.heroWrapper {
-  width: 100%;
-  max-width: 1560px;
-  max-height: 884px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 }
 
 .heroTextBox {
@@ -87,4 +87,3 @@
     margin: calc(var(--base) / 2);
   }
 }
-

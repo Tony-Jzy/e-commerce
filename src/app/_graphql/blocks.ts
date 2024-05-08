@@ -51,7 +51,14 @@ export const ARCHIVE_BLOCK = `
         id
         slug
         title
+        backId
+        isSubSKU
+        SKU
+        subSKU
+        subSKUList
         priceJSON
+        priceRange
+        specification
         ${META}
       }
     }
@@ -63,7 +70,14 @@ export const ARCHIVE_BLOCK = `
         id
         slug
         title
+        backId
+        isSubSKU
+        SKU
+        subSKU
+        subSKUList
         priceJSON
+        priceRange
+        specification
         ${PRODUCT_CATEGORIES}
         ${META}
       }

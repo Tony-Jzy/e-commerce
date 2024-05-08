@@ -31,7 +31,9 @@ export const Input: React.FC<Props> = ({
         {required ? <span className={classes.asterisk}>&nbsp;*</span> : ''}
       </label>
       <input
-        className={[classes.input, error && classes.error].filter(Boolean).join(' ')}
+        className={[classes.input, error && classes.error, disabled && classes.disabled]
+          .filter(Boolean)
+          .join(' ')}
         {...{ type }}
         {...register(name, {
           required,
@@ -46,6 +48,7 @@ export const Input: React.FC<Props> = ({
             : {}),
         })}
         disabled={disabled}
+        autoComplete="nope"
       />
       {error && (
         <div className={classes.errorMessage}>

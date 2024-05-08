@@ -2,6 +2,7 @@ import type { PayloadHandler } from 'payload/config'
 import Stripe from 'stripe'
 
 import type { CartItems } from '../payload-types'
+import { title } from 'process'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2022-08-01',
@@ -82,8 +83,15 @@ export const createPaymentIntent: PayloadHandler = async (req, res): Promise<voi
           return null
         }
 
+        const ifPacked = product.title.indexOf('Pack') > -1
+
+        const regex = /\(Pack:\s*(\d+)\)/
+        const match = product.title.match(regex)
+
+        const packCount = ifPacked ? (match ? parseInt(match[1]) : 1) : 1
+
         const price = prices.data[0]
-        total += price.unit_amount * quantity
+        total += price.unit_amount * quantity * packCount
 
         return null
       }),
@@ -93,10 +101,14 @@ export const createPaymentIntent: PayloadHandler = async (req, res): Promise<voi
       throw new Error('There is nothing to pay for, add some items to your cart and try again.')
     }
 
+    const gstPercentage = 10 // GST rate
+    const gstAmount = (total * gstPercentage) / 100
+    const totalAmount = Math.round(total + gstAmount) // Total includes GST
+
     const paymentIntent = await stripe.paymentIntents.create({
       customer: stripeCustomerID,
-      amount: total,
-      currency: 'usd',
+      amount: totalAmount,
+      currency: 'aud',
       payment_method_types: ['card'],
     })
 

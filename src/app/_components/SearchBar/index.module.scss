@@ -2,8 +2,11 @@
 .gutter {
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(255, 213, 31);
-    padding: 36px 0;
+    margin-top: 60px;
+
+    @include mid-break {
+      margin-top: 0;
+    }
   }
 
 .dropdown {
@@ -37,47 +40,59 @@
 
 .searchBar_container {
     display: flex;
-    max-width: 80%;
-    max-width: 1000px;
+    position: relative;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
-    gap: 3vh;
-    
-
-  @include mid-break {
-    max-width: 80%;
-  }
-
-  @include small-break {
-    max-width: 80%;
-  }
+    gap: 10px;
   }
   
   .search_input {
-    width: 80%; /* Adjust as needed for width */
-    padding: 15px 20px; /* Adjust for padding and height */
+    width: 100%; /* Adjust as needed for width */
+    padding: 15px 25px; /* Adjust for padding and height */
     font-size: 18px; /* Adjust as needed for font size */
     border: 1px solid #dfe1e5;
-    border-radius: 24px;
+    border-radius: 5px;
     outline: none;
-    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    box-shadow: 0 1px 3px rgb(32 33 36 / 28%);
     box-sizing: border-box; /* To make sure padding doesn't affect the width */
   }
   
   /* Additional styling for focus effect */
   .search_input:focus {
-    box-shadow: 0 3px 8px rgb(32 33 36 / 40%);
+    box-shadow: 0 3px 5px rgb(32 33 36 / 40%);
+  }
+
+  .reset{
+    display: none;
+    position: absolute;
+    right: 5px;
+    padding: 15px 15px;
+    background: transparent;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .reset:hover{
+    transform: scale(1.1)
+  }
+
+  .show{
+    display: block;
   }
 
   .search_btn{
-    border-radius: 24px;
     font-size: 18px; /* Adjust as needed for font size */
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     text-align: center;
+    border-radius: 25px;
+    padding: 15px 25px;
     box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
   }
 

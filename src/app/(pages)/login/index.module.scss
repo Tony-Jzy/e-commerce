@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 45%;
   height: 100vh;
-  margin-top: -50px;
+  margin-top: -135px;
 
   @include mid-break {
     grid-template-columns: 1fr;
@@ -12,6 +12,12 @@
     background-repeat: no-repeat;
     background-position: center;
     background-image: url('/assets/images/1.jpg');
+    margin-top: -145px;
+
+  }
+
+  @include small-break {
+    margin-top: -100px;
   }
 
   p {
@@ -51,16 +57,31 @@
   }
 }
 
+
+.imageContainer{
+  @include mid-break{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .logo {
   margin: 60px;
-  width: 30%;
-  min-width: 150px;
+  width: 10%;
+  min-width: 80px;
   z-index: 10;
+  border-radius: 10px;
+  transition: 0.1s ease-in-out;
 
   @include mid-break {
     width: 45%;
     margin: 10px;
   }
+}
+
+.logo:hover {
+  opacity: 0.5;
 }
 
 .formWrapper {
