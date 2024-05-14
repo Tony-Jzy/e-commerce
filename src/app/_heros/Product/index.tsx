@@ -30,7 +30,7 @@ export const ProductHero: React.FC<{
     meta: { image: metaImage, description } = {},
   } = product
 
-  if (product === null || !product || product.title === 'undefined') {
+  if (product === null || !product || product.title === undefined || !title) {
     return null
   }
 

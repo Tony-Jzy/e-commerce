@@ -63,7 +63,11 @@ export const Price: React.FC<{
     highlight = false,
   } = props
 
-  const unit = (JSON.parse(specification)?.Unit || 'each').toUpperCase()
+  if (product === null || !product || product.specification === undefined) {
+    return null
+  }
+
+  const unit = (JSON.parse(product.specification)?.Unit || 'each').toUpperCase()
 
   const [price, setPrice] = useState<{
     actualPrice: string

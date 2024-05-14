@@ -40,7 +40,13 @@ export const PRODUCT = `
           slug
           title
           ${META}
+          backId
+          SKU
+          subSKU
+          subSKUList
           priceJSON
+          priceRange
+          specification
         }
         ${META}
       }

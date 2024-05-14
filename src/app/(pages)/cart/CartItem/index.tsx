@@ -12,7 +12,7 @@ import { cp } from 'fs'
 import toast from 'react-hot-toast'
 
 const CartItem = ({ product, title, metaImage, qty, changeItemToCart, index }) => {
-  if (product === null || !product || product.title === 'undefined') {
+  if (product === null || !product || product.title === undefined || !title) {
     return null
   }
 
